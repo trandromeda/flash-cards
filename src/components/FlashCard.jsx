@@ -90,6 +90,14 @@ export const FlashCard = ({
           </div>
         )}
 
+        {/* Notes */}
+        {card.notes && (
+          <div className="mt-6 p-4 bg-yellow-50 dark:bg-yellow-950 rounded-lg border border-yellow-200 dark:border-yellow-800">
+            <p className="text-xs text-yellow-700 dark:text-yellow-400 font-semibold mb-2">Notes:</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{card.notes}</p>
+          </div>
+        )}
+
         {/* Tags */}
         <div className="mt-6 flex flex-wrap gap-2">
           {card.tags.map(tag => (
