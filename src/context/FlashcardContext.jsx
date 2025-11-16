@@ -39,7 +39,8 @@ export const FlashcardProvider = ({ children }) => {
           tags: card.tags || [],
           synonymId: card.synonym_id,
           lastSeen: card.last_seen,
-          notes: card.notes
+          notes: card.notes,
+          createdAt: card.created_at
         }))
 
         setFlashcards(transformedData)
@@ -65,11 +66,58 @@ export const FlashcardProvider = ({ children }) => {
       )
     : flashcards
 
-  // Get a random card from filtered cards
+  // Get a smart card using weighted random selection with square root growth
+  // Optimized for weekly study sessions with recency bonus for newly imported cards
   const getRandomCard = useCallback(() => {
     if (filteredCards.length === 0) return null
-    const randomIndex = Math.floor(Math.random() * filteredCards.length)
-    return filteredCards[randomIndex]
+
+    const now = new Date()
+
+    // Calculate weights for each card
+    const weights = filteredCards.map(card => {
+      // Never seen? High weight to prioritize new vocabulary
+      if (!card.lastSeen) {
+        return 100
+      }
+
+      // Calculate hours since last seen
+      const lastSeenDate = new Date(card.lastSeen)
+      const hoursSinceLastSeen = (now - lastSeenDate) / (1000 * 60 * 60)
+
+      // Base weight with square root growth: grows quickly at first, slows over time
+      // After 1 week (168 hrs): ~14, vs never-seen: 100 (7x more likely for new cards)
+      // After 1 day (24 hrs): ~6, vs never-seen: 100 (17x more likely for new cards)
+      let weight = Math.max(1, Math.floor(Math.sqrt(hoursSinceLastSeen)) + 1)
+
+      // Apply recency bonus for cards created within last 30 days
+      // This ensures newly imported cards appear more often even after being reviewed
+      if (card.createdAt) {
+        const createdDate = new Date(card.createdAt)
+        const cardAgeDays = (now - createdDate) / (1000 * 60 * 60 * 24)
+
+        if (cardAgeDays < 30) {
+          // Bonus ranges from 1.5x (brand new) to 1.0x (at 30 days)
+          const recencyBonus = 1.5 - (cardAgeDays / 30) * 0.5
+          weight = Math.floor(weight * recencyBonus)
+        }
+      }
+
+      return weight
+    })
+
+    // Weighted random selection
+    const totalWeight = weights.reduce((sum, w) => sum + w, 0)
+    let random = Math.random() * totalWeight
+
+    for (let i = 0; i < filteredCards.length; i++) {
+      random -= weights[i]
+      if (random <= 0) {
+        return filteredCards[i]
+      }
+    }
+
+    // Fallback (should rarely reach here)
+    return filteredCards[0]
   }, [filteredCards])
 
   // Update last_seen timestamp in Supabase
@@ -235,7 +283,8 @@ export const FlashcardProvider = ({ children }) => {
         tags: data[0].tags || [],
         synonymId: data[0].synonym_id,
         lastSeen: data[0].last_seen,
-        notes: data[0].notes
+        notes: data[0].notes,
+        createdAt: data[0].created_at
       }
 
       // Add to local state
