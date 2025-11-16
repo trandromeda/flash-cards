@@ -66,59 +66,55 @@ export const FlashcardProvider = ({ children }) => {
       )
     : flashcards
 
-  // Get a smart card using weighted random selection with square root growth
-  // Optimized for weekly study sessions with recency bonus for newly imported cards
-  const getRandomCard = useCallback(() => {
+  // Get a smart card using database-side weighted random selection
+  // PostgreSQL function calculates weights and returns top candidates
+  const getRandomCard = useCallback(async () => {
     if (filteredCards.length === 0) return null
 
-    const now = new Date()
+    try {
+      // Call PostgreSQL function to get weighted random candidates
+      const { data, error } = await supabase
+        .rpc('get_weighted_random_cards', {
+          selected_tags: selectedTags.length > 0 ? selectedTags : null,
+          candidate_count: 20
+        })
 
-    // Calculate weights for each card
-    const weights = filteredCards.map(card => {
-      // Never seen? High weight to prioritize new vocabulary
-      if (!card.lastSeen) {
-        return 100
+      if (error) {
+        console.error('Error fetching weighted cards:', error)
+        // Fallback to simple random from filtered cards
+        const randomIndex = Math.floor(Math.random() * filteredCards.length)
+        return filteredCards[randomIndex]
       }
 
-      // Calculate hours since last seen
-      const lastSeenDate = new Date(card.lastSeen)
-      const hoursSinceLastSeen = (now - lastSeenDate) / (1000 * 60 * 60)
-
-      // Base weight with square root growth: grows quickly at first, slows over time
-      // After 1 week (168 hrs): ~14, vs never-seen: 100 (7x more likely for new cards)
-      // After 1 day (24 hrs): ~6, vs never-seen: 100 (17x more likely for new cards)
-      let weight = Math.max(1, Math.floor(Math.sqrt(hoursSinceLastSeen)) + 1)
-
-      // Apply recency bonus for cards created within last 30 days
-      // This ensures newly imported cards appear more often even after being reviewed
-      if (card.createdAt) {
-        const createdDate = new Date(card.createdAt)
-        const cardAgeDays = (now - createdDate) / (1000 * 60 * 60 * 24)
-
-        if (cardAgeDays < 30) {
-          // Bonus ranges from 1.5x (brand new) to 1.0x (at 30 days)
-          const recencyBonus = 1.5 - (cardAgeDays / 30) * 0.5
-          weight = Math.floor(weight * recencyBonus)
-        }
+      if (!data || data.length === 0) {
+        // No cards returned, fallback
+        return null
       }
 
-      return weight
-    })
+      // Pick randomly from the weighted candidates
+      const randomIndex = Math.floor(Math.random() * data.length)
+      const selectedCard = data[randomIndex]
 
-    // Weighted random selection
-    const totalWeight = weights.reduce((sum, w) => sum + w, 0)
-    let random = Math.random() * totalWeight
-
-    for (let i = 0; i < filteredCards.length; i++) {
-      random -= weights[i]
-      if (random <= 0) {
-        return filteredCards[i]
+      // Transform database format to app format
+      return {
+        id: selectedCard.id,
+        vietnamese: selectedCard.vietnamese,
+        english: selectedCard.english,
+        example: selectedCard.example,
+        exampleTranslation: selectedCard.example_translation,
+        tags: selectedCard.tags || [],
+        synonymId: selectedCard.synonym_id,
+        lastSeen: selectedCard.last_seen,
+        notes: selectedCard.notes,
+        createdAt: selectedCard.created_at
       }
+    } catch (err) {
+      console.error('Error in getRandomCard:', err)
+      // Fallback to simple random
+      const randomIndex = Math.floor(Math.random() * filteredCards.length)
+      return filteredCards[randomIndex]
     }
-
-    // Fallback (should rarely reach here)
-    return filteredCards[0]
-  }, [filteredCards])
+  }, [filteredCards, selectedTags])
 
   // Update last_seen timestamp in Supabase
   const updateLastSeen = useCallback(async (cardId) => {
@@ -139,24 +135,28 @@ export const FlashcardProvider = ({ children }) => {
   // Initialize with a random card (only after flashcards are loaded)
   useEffect(() => {
     if (flashcards.length === 0 || currentCard) return
-    const randomIndex = Math.floor(Math.random() * flashcards.length)
-    const card = flashcards[randomIndex]
-    setCurrentCard(card)
-    // Add initial card to viewed cards
-    if (card && !viewedCards.find(c => c.id === card.id)) {
-      setViewedCards(prev => [...prev, card])
+
+    async function initializeCard() {
+      const card = await getRandomCard()
+      setCurrentCard(card)
+      // Add initial card to viewed cards
+      if (card && !viewedCards.find(c => c.id === card.id)) {
+        setViewedCards(prev => [...prev, card])
+      }
+      // Update last_seen timestamp
+      if (card) {
+        updateLastSeen(card.id)
+      }
     }
-    // Update last_seen timestamp
-    if (card) {
-      updateLastSeen(card.id)
-    }
-  }, [flashcards, currentCard, viewedCards, setViewedCards, updateLastSeen])
+
+    initializeCard()
+  }, [flashcards, currentCard, viewedCards, setViewedCards, updateLastSeen, getRandomCard])
 
   // Next random card
-  const nextCard = useCallback(() => {
+  const nextCard = useCallback(async () => {
     setIsFlipped(false)
-    setTimeout(() => {
-      const card = getRandomCard()
+    setTimeout(async () => {
+      const card = await getRandomCard()
       setCurrentCard(card)
       // Add to viewed cards
       if (card && !viewedCards.find(c => c.id === card.id)) {
@@ -239,7 +239,7 @@ export const FlashcardProvider = ({ children }) => {
 
       // If deleting the current card, select a new one
       if (currentCard && currentCard.id === id) {
-        const newCard = getRandomCard()
+        const newCard = await getRandomCard()
         setCurrentCard(newCard)
       }
 
