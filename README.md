@@ -53,6 +53,30 @@ This app uses Google Cloud Text-to-Speech API for high-quality Vietnamese pronun
 
 **Note:** The app will fall back to the browser's built-in text-to-speech if no API key is provided.
 
+### Unsplash API Setup (Optional)
+
+This app uses the Unsplash API to display beautiful Vietnam landscape backgrounds that change every minute.
+
+**The app works without an API key** in demo mode (50 requests/hour). To get higher rate limits:
+
+1. **Create an Unsplash Account**
+   - Go to [Unsplash Developers](https://unsplash.com/developers)
+   - Register a new application
+
+2. **Get Your Access Key**
+   - Only the **Access Key** is needed (not the Secret Key)
+   - Copy the Access Key from your application settings
+
+3. **Add Access Key to Your Project**
+   - Add to your `.env` file:
+     ```
+     VITE_UNSPLASH_ACCESS_KEY=your_access_key_here
+     ```
+
+**Rate Limits:**
+- Without API key: Demo mode (50 requests/hour)
+- With API key: Production mode (5000 requests/hour)
+
 ### Development
 
 ```bash

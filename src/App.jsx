@@ -90,44 +90,38 @@ function App() {
 
   // Fetch and update background image from Unsplash every minute
   useEffect(() => {
-    // Curated list of beautiful Vietnam landscape photos from Unsplash
-    const vietnamPhotos = [
-      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1920&h=1080&fit=crop', // Ha Long Bay
-      'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=1920&h=1080&fit=crop', // Hoi An
-      'https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&h=1080&fit=crop', // Rice terraces
-      'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=1920&h=1080&fit=crop', // Hanoi street
-      'https://images.unsplash.com/photo-1555227063-82e15fcf5ee2?w=1920&h=1080&fit=crop', // Saigon
-      'https://images.unsplash.com/photo-1509825829770-e869beec3736?w=1920&h=1080&fit=crop', // Tam Coc
-      'https://images.unsplash.com/photo-1540611025311-01df3cef54b5?w=1920&h=1080&fit=crop', // Vietnamese landscape
-      'https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=1920&h=1080&fit=crop', // Mekong Delta
-    ]
-
-    let currentIndex = 0
-
     const updateBackground = async () => {
       try {
-        const apiKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY
+        const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY
 
-        if (apiKey) {
-          // Use official Unsplash API with access key
-          const response = await fetch(
-            `https://api.unsplash.com/photos/random?query=vietnam&orientation=landscape&client_id=${apiKey}`
-          )
-          const data = await response.json()
-          if (data.urls && data.urls.regular) {
-            setBackgroundImage(data.urls.regular)
-            return
-          }
+        // Build the API URL - works with or without access key
+        // Without key: uses demo mode (50 requests/hour)
+        // With key: uses production mode (5000 requests/hour)
+        const apiUrl = new URL('https://api.unsplash.com/photos/random')
+        apiUrl.searchParams.append('query', 'vietnam')
+        apiUrl.searchParams.append('orientation', 'landscape')
+
+        if (accessKey) {
+          apiUrl.searchParams.append('client_id', accessKey)
         }
 
-        // Fallback: Cycle through curated Vietnam photos
-        setBackgroundImage(vietnamPhotos[currentIndex])
-        currentIndex = (currentIndex + 1) % vietnamPhotos.length
+        const response = await fetch(apiUrl.toString())
+
+        if (!response.ok) {
+          throw new Error(`Unsplash API error: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        if (data.urls && data.urls.regular) {
+          setBackgroundImage(data.urls.regular)
+        }
       } catch (error) {
-        console.error('Error fetching background:', error)
-        // Use curated photos as fallback
-        setBackgroundImage(vietnamPhotos[currentIndex])
-        currentIndex = (currentIndex + 1) % vietnamPhotos.length
+        console.error('Error fetching background from Unsplash:', error)
+        // Keep current background or use gradient fallback
+        if (!backgroundImage) {
+          console.log('Using gradient fallback')
+        }
       }
     }
 
