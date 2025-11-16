@@ -35,7 +35,7 @@
   {
     "id": 4,
     "vietnamese": "xin lỗi",
-    "english": "sorry / Excuse me",
+    "english": "sorry / excuse me",
     "example": "Xin lỗi, em đến muộn.",
     "exampleTranslation": "Sorry, I'm late.",
     "tags": [
@@ -56,7 +56,7 @@
   {
     "id": 6,
     "vietnamese": "phải",
-    "english": "right / Must",
+    "english": "right / must",
     "example": "Vâng, phải ạ.",
     "exampleTranslation": "Yes, that's right.",
     "tags": [
@@ -99,7 +99,7 @@
   {
     "id": 10,
     "vietnamese": "nào",
-    "english": "which / What",
+    "english": "which / what",
     "example": "Thành phố nào?",
     "exampleTranslation": "Which city?",
     "tags": [
@@ -212,7 +212,7 @@
   {
     "id": 21,
     "vietnamese": "ngoài ra",
-    "english": "Therefore / In addition",
+    "english": "therefore / in addition",
     "example": "Nhà hàng này có nhiều món Việt. Ngoài ra, đồ uống được miễn phí.",
     "exampleTranslation": "This restaurant has many Vietnamese dishes. In addition, drinks are free.",
     "tags": [
@@ -222,7 +222,7 @@
   {
     "id": 22,
     "vietnamese": "không những thế",
-    "english": "Therefore / In addition",
+    "english": "therefore / in addition",
     "example": "Không được cãi nhau. Không những thế, không được mặc quần áo màu đen.",
     "exampleTranslation": "No arguing. Furthermore, you cannot wear black clothes.",
     "tags": [
@@ -292,7 +292,7 @@
   {
     "id": 29,
     "vietnamese": "của",
-    "english": "of / Possessive marker",
+    "english": "of / possessive marker",
     "example": "Vườn của em không có rau xanh.",
     "exampleTranslation": "My garden doesn't have green vegetables.",
     "tags": [
@@ -313,7 +313,7 @@
   {
     "id": 31,
     "vietnamese": "giờ",
-    "english": "o'clock / Hour",
+    "english": "o'clock / hour",
     "example": "9 giờ rưỡi.",
     "exampleTranslation": "9:30.",
     "tags": [
@@ -403,7 +403,7 @@
   {
     "id": 40,
     "vietnamese": "khoảng",
-    "english": "about / Approximately",
+    "english": "about / approximately",
     "example": "Mẹ sẽ họp đến khoảng 5 giờ.",
     "exampleTranslation": "Mom will be in a meeting until about 5 o'clock.",
     "tags": [
@@ -413,7 +413,7 @@
   {
     "id": 41,
     "vietnamese": "thường",
-    "english": "often / Usually",
+    "english": "often / usually",
     "example": "Anh thường đi siêu thị 2 lần / 1 tuần.",
     "exampleTranslation": "I usually go to the supermarket 2 times per week.",
     "tags": [
@@ -493,7 +493,7 @@
   {
     "id": 49,
     "vietnamese": "khi rảnh",
-    "english": "When I'm free / Free time",
+    "english": "when I'm free / free time",
     "example": "Khi rảnh, anh thích đọc sách.",
     "exampleTranslation": "When I'm free, I like to read books.",
     "tags": [
@@ -594,7 +594,7 @@
   {
     "id": 59,
     "vietnamese": "giữ của",
-    "english": "to keep / Hold onto things",
+    "english": "to keep / hold onto things",
     "example": "Con nhớ giữ của cẩn thận.",
     "exampleTranslation": "Remember to keep your belongings carefully.",
     "tags": [
@@ -614,7 +614,7 @@
   {
     "id": 61,
     "vietnamese": "còn tuỳ",
-    "english": "It depends",
+    "english": "it depends",
     "example": "Còn tuỳ. Anh phải xem lịch.",
     "exampleTranslation": "It depends. I have to check my schedule.",
     "tags": [
@@ -716,7 +716,7 @@
   {
     "id": 71,
     "vietnamese": "ăn Tết",
-    "english": "celebrate New Year",
+    "english": "celebrate new year",
     "example": "Chúng ta sẽ ăn Tết với gia đình.",
     "exampleTranslation": "We will celebrate New Year with family.",
     "tags": [
@@ -726,7 +726,7 @@
   {
     "id": 72,
     "vietnamese": "năm mới",
-    "english": "western New Year",
+    "english": "western new year",
     "example": "Chúc mừng năm mới!",
     "exampleTranslation": "Happy New Year!",
     "tags": [
@@ -736,7 +736,7 @@
   {
     "id": 73,
     "vietnamese": "Tết Tây",
-    "english": "western New Year",
+    "english": "western new year",
     "example": "Tết Tây là ngày 1 tháng 1.",
     "exampleTranslation": "Western New Year is January 1st.",
     "tags": [
@@ -767,7 +767,7 @@
   {
     "id": 76,
     "vietnamese": "Giáng Sinh",
-    "english": "Christmas",
+    "english": "christmas",
     "example": "Chúc mừng Giáng Sinh!",
     "exampleTranslation": "Merry Christmas!",
     "tags": [
@@ -777,7 +777,7 @@
   {
     "id": 77,
     "vietnamese": "No-En",
-    "english": "Christmas",
+    "english": "christmas",
     "example": "Anh đi đâu vào No-En?",
     "exampleTranslation": "Where are you going for Christmas?",
     "tags": [
@@ -1068,7 +1068,7 @@
   {
     "id": 106,
     "vietnamese": "chả giò",
-    "english": "fried spring rolls (Southern)",
+    "english": "fried spring rolls (southern)",
     "example": "Anh thích chả giò lắm.",
     "exampleTranslation": "I really like fried spring rolls.",
     "tags": [
@@ -1078,7 +1078,7 @@
   {
     "id": 107,
     "vietnamese": "nem rán",
-    "english": "fried spring rolls (Northern)",
+    "english": "fried spring rolls (northern)",
     "example": "Em nghe mẹ nói có 4 món chính là nem rán, thịt bò xào dứa, tôm hấp, gà rán.",
     "exampleTranslation": "I heard mom say there are 4 main dishes: fried spring rolls, stir-fried beef with pineapple, steamed shrimp, and fried chicken.",
     "tags": [
@@ -1108,7 +1108,7 @@
   {
     "id": 110,
     "vietnamese": "đồ nướng",
-    "english": "bBQ",
+    "english": "bbq",
     "example": "Anh thích ăn đồ nướng.",
     "exampleTranslation": "I like eating BBQ.",
     "tags": [
@@ -1209,7 +1209,7 @@
   {
     "id": 120,
     "vietnamese": "mời",
-    "english": "Invite someone",
+    "english": "invite someone",
     "example": "Mẹ thường mời mọi người đến nhà.",
     "exampleTranslation": "Mom often invites everyone to the house.",
     "tags": [
@@ -1480,7 +1480,7 @@
   {
     "id": 147,
     "vietnamese": "xe đẩy",
-    "english": "shopping cart / Trolley",
+    "english": "shopping cart / trolley",
     "example": "Giỏ đựng hàng thôi con ạ, vì hôm nay mình không cần mua nhiều thức ăn lắm.",
     "exampleTranslation": "Just a basket dear, because today we don't need to buy much food.",
     "tags": [
@@ -1490,7 +1490,7 @@
   {
     "id": 148,
     "vietnamese": "quầy",
-    "english": "counter / Stall",
+    "english": "counter / stall",
     "example": "Đến quầy thực phẩm tươi.",
     "exampleTranslation": "Go to the fresh food counter.",
     "tags": [
@@ -1572,7 +1572,7 @@
   {
     "id": 156,
     "vietnamese": "xếp hàng",
-    "english": "line up / Queue",
+    "english": "line up / queue",
     "example": "Mua nhanh nhé, để còn ra quầy thanh toán xếp hàng.",
     "exampleTranslation": "Buy quickly, so we can go queue at the checkout counter.",
     "tags": [
@@ -1632,7 +1632,7 @@
   {
     "id": 162,
     "vietnamese": "ngoan",
-    "english": "well-behaved / Good",
+    "english": "well-behaved / good",
     "example": "Bà nói, Hương rất ngoan.",
     "exampleTranslation": "Grandmother says Huong is very well-behaved.",
     "tags": [
@@ -1682,7 +1682,7 @@
   {
     "id": 167,
     "vietnamese": "Lẩu Thái",
-    "english": "Thai hot pot",
+    "english": "thai hot pot",
     "example": "Được. Chúng ta sẽ ăn lẩu Thái tối nay.",
     "exampleTranslation": "Okay. We'll eat Thai hot pot tonight.",
     "tags": [
@@ -1722,7 +1722,7 @@
   {
     "id": 171,
     "vietnamese": "sở thích",
-    "english": "Hobby / Interest",
+    "english": "hobby / interest",
     "example": "Sở thích của bố là chụp hình.",
     "exampleTranslation": "Dad's hobby is taking photos.",
     "tags": [
@@ -1892,7 +1892,7 @@
   {
     "id": 188,
     "vietnamese": "liên hoan",
-    "english": "party / Celebration",
+    "english": "party / celebration",
     "example": "Anh Nam muốn liên hoan trước khi chị Lan nghỉ việc.",
     "exampleTranslation": "Nam wants to have a party before Lan quits her job.",
     "tags": [
@@ -1922,7 +1922,7 @@
   {
     "id": 191,
     "vietnamese": "yên tâm",
-    "english": "rest assured / At ease",
+    "english": "rest assured / at ease",
     "example": "Mọi người không uống rượu. Anh yên tâm.",
     "exampleTranslation": "No one is drinking alcohol. You can rest assured.",
     "tags": [
@@ -1972,7 +1972,7 @@
   {
     "id": 196,
     "vietnamese": "bệnh tật",
-    "english": "Illness / Sickness",
+    "english": "illness / sickness",
     "example": "Bệnh tật làm anh rất mệt.",
     "exampleTranslation": "Illness makes me very tired.",
     "tags": [
@@ -2113,7 +2113,7 @@
   {
     "id": 210,
     "vietnamese": "mổ",
-    "english": "surgery / Operate",
+    "english": "surgery / operate",
     "example": "Bác sĩ phải mổ.",
     "exampleTranslation": "The doctor has to operate.",
     "tags": [
@@ -2123,7 +2123,7 @@
   {
     "id": 211,
     "vietnamese": "đau dạ dày",
-    "english": "stomach pain / Gastric pain",
+    "english": "stomach pain / gastric pain",
     "example": "Anh ấy bị đau dạ dày.",
     "exampleTranslation": "He has stomach pain.",
     "tags": [
@@ -2193,7 +2193,7 @@
   {
     "id": 218,
     "vietnamese": "kiêng",
-    "english": "avoid / Abstain from",
+    "english": "avoid / abstain from",
     "example": "Kiêng = không được làm.",
     "exampleTranslation": "Avoid = must not do.",
     "tags": [
@@ -2214,7 +2214,7 @@
   {
     "id": 220,
     "vietnamese": "khám",
-    "english": "examine / Check-up",
+    "english": "examine / check-up",
     "example": "Khi nào anh ấy phải đến khám lại?",
     "exampleTranslation": "When does he have to come for a check-up again?",
     "tags": [
@@ -2224,7 +2224,7 @@
   {
     "id": 221,
     "vietnamese": "phở",
-    "english": "Pho (Vietnamese noodle soup)",
+    "english": "pho (Vietnamese noodle soup)",
     "example": "Hôm nay ăn phở nhé.",
     "exampleTranslation": "Let's eat pho today.",
     "tags": [
@@ -2274,7 +2274,7 @@
   {
     "id": 226,
     "vietnamese": "Pepsi lạnh",
-    "english": "Cold Pepsi",
+    "english": "cold pepsi",
     "example": "Cho tôi một Pepsi lạnh.",
     "exampleTranslation": "Give me a cold Pepsi.",
     "tags": [
@@ -2314,7 +2314,7 @@
   {
     "id": 230,
     "vietnamese": "làm vỡ",
-    "english": "break / Shatter",
+    "english": "break / shatter",
     "example": "Lại làm vỡ cửa sổ.",
     "exampleTranslation": "Breaking the window again.",
     "tags": [
@@ -2334,7 +2334,7 @@
   {
     "id": 232,
     "vietnamese": "đánh",
-    "english": "hit / Beat",
+    "english": "hit / beat",
     "example": "Bố đánh con.",
     "exampleTranslation": "Dad hits the child.",
     "tags": [
@@ -2374,7 +2374,7 @@
   {
     "id": 236,
     "vietnamese": "tìm",
-    "english": "search / Look for",
+    "english": "search / look for",
     "example": "Anh tìm gì?",
     "exampleTranslation": "What are you looking for?",
     "tags": [

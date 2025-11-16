@@ -2,6 +2,7 @@ import { Volume2, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useAudioContext } from '@/context/AudioContext'
+import { getTagEmoji } from '@/utils/constants'
 
 /**
  * Individual flash card component
@@ -93,7 +94,7 @@ export const FlashCard = ({
         <div className="mt-6 flex flex-wrap gap-2">
           {card.tags.map(tag => (
             <Badge key={tag} variant="secondary">
-              {tag}
+              {getTagEmoji(tag)} {tag}
             </Badge>
           ))}
         </div>
