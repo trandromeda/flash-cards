@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import flashcardsData from '@/data/flashcards.json'
+import { supabase } from '@/lib/supabase'
 
 const FlashcardContext = createContext(null)
 
@@ -8,12 +8,52 @@ const FlashcardContext = createContext(null)
  * Provider component for flashcard state and logic
  */
 export const FlashcardProvider = ({ children }) => {
-  const [flashcards] = useState(flashcardsData)
+  const [flashcards, setFlashcards] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [currentCard, setCurrentCard] = useState(null)
   const [isFlipped, setIsFlipped] = useState(false)
   const [view, setView] = useState('study')
   const [selectedTags, setSelectedTags] = useState([])
   const [viewedCards, setViewedCards] = useLocalStorage('viewedCards', [])
+
+  // Fetch flashcards from Supabase on mount
+  useEffect(() => {
+    async function fetchFlashcards() {
+      try {
+        setLoading(true)
+        const { data, error: fetchError } = await supabase
+          .from('flashcards')
+          .select('*')
+          .order('id', { ascending: true })
+
+        if (fetchError) throw fetchError
+
+        // Transform database records to match app format
+        const transformedData = data.map(card => ({
+          id: card.id,
+          vietnamese: card.vietnamese,
+          english: card.english,
+          example: card.example,
+          exampleTranslation: card.example_translation,
+          tags: card.tags || [],
+          synonymId: card.synonym_id,
+          lastSeen: card.last_seen,
+          notes: card.notes
+        }))
+
+        setFlashcards(transformedData)
+        setError(null)
+      } catch (err) {
+        console.error('Error fetching flashcards:', err)
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchFlashcards()
+  }, [])
 
   // Get all unique tags
   const allTags = [...new Set(flashcards.flatMap(card => card.tags))].sort()
@@ -32,9 +72,25 @@ export const FlashcardProvider = ({ children }) => {
     return filteredCards[randomIndex]
   }, [filteredCards])
 
-  // Initialize with a random card (only on mount)
+  // Update last_seen timestamp in Supabase
+  const updateLastSeen = useCallback(async (cardId) => {
+    try {
+      const { error: updateError } = await supabase
+        .from('flashcards')
+        .update({ last_seen: new Date().toISOString() })
+        .eq('id', cardId)
+
+      if (updateError) {
+        console.error('Error updating last_seen:', updateError)
+      }
+    } catch (err) {
+      console.error('Error updating last_seen:', err)
+    }
+  }, [])
+
+  // Initialize with a random card (only after flashcards are loaded)
   useEffect(() => {
-    if (flashcards.length === 0) return
+    if (flashcards.length === 0 || currentCard) return
     const randomIndex = Math.floor(Math.random() * flashcards.length)
     const card = flashcards[randomIndex]
     setCurrentCard(card)
@@ -42,7 +98,11 @@ export const FlashcardProvider = ({ children }) => {
     if (card && !viewedCards.find(c => c.id === card.id)) {
       setViewedCards(prev => [...prev, card])
     }
-  }, [])
+    // Update last_seen timestamp
+    if (card) {
+      updateLastSeen(card.id)
+    }
+  }, [flashcards, currentCard, viewedCards, setViewedCards, updateLastSeen])
 
   // Next random card
   const nextCard = useCallback(() => {
@@ -54,8 +114,12 @@ export const FlashcardProvider = ({ children }) => {
       if (card && !viewedCards.find(c => c.id === card.id)) {
         setViewedCards(prev => [...prev, card])
       }
+      // Update last_seen timestamp in Supabase
+      if (card) {
+        updateLastSeen(card.id)
+      }
     }, 200)
-  }, [getRandomCard, viewedCards, setViewedCards])
+  }, [getRandomCard, viewedCards, setViewedCards, updateLastSeen])
 
   // Toggle tag filter
   const toggleTag = useCallback((tag) => {
@@ -71,8 +135,80 @@ export const FlashcardProvider = ({ children }) => {
     setSelectedTags([])
   }, [])
 
+  // Update flashcard
+  const updateFlashcard = useCallback(async (id, updates) => {
+    try {
+      // Transform app format to database format
+      const dbUpdates = {
+        vietnamese: updates.vietnamese,
+        english: updates.english,
+        example: updates.example || null,
+        example_translation: updates.exampleTranslation || null,
+        tags: updates.tags || [],
+        notes: updates.notes || null
+      }
+
+      const { error: updateError } = await supabase
+        .from('flashcards')
+        .update(dbUpdates)
+        .eq('id', id)
+
+      if (updateError) throw updateError
+
+      // Update local state
+      setFlashcards(prev => prev.map(card =>
+        card.id === id
+          ? { ...card, ...updates }
+          : card
+      ))
+
+      // Update current card if it's the one being edited
+      setCurrentCard(prev =>
+        prev && prev.id === id
+          ? { ...prev, ...updates }
+          : prev
+      )
+
+      return { success: true }
+    } catch (err) {
+      console.error('Error updating flashcard:', err)
+      return { success: false, error: err.message }
+    }
+  }, [])
+
+  // Delete flashcard
+  const deleteFlashcard = useCallback(async (id) => {
+    try {
+      const { error: deleteError } = await supabase
+        .from('flashcards')
+        .delete()
+        .eq('id', id)
+
+      if (deleteError) throw deleteError
+
+      // Update local state
+      setFlashcards(prev => prev.filter(card => card.id !== id))
+
+      // If deleting the current card, select a new one
+      if (currentCard && currentCard.id === id) {
+        const newCard = getRandomCard()
+        setCurrentCard(newCard)
+      }
+
+      // Remove from viewed cards
+      setViewedCards(prev => prev.filter(card => card.id !== id))
+
+      return { success: true }
+    } catch (err) {
+      console.error('Error deleting flashcard:', err)
+      return { success: false, error: err.message }
+    }
+  }, [currentCard, getRandomCard, setViewedCards])
+
   const value = {
     flashcards,
+    loading,
+    error,
     currentCard,
     isFlipped,
     setIsFlipped,
@@ -85,7 +221,10 @@ export const FlashcardProvider = ({ children }) => {
     viewedCards,
     nextCard,
     toggleTag,
-    clearFilters
+    clearFilters,
+    updateLastSeen,
+    updateFlashcard,
+    deleteFlashcard
   }
 
   return (
