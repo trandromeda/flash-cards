@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button'
 import { ModeToggle } from '@/components/mode-toggle'
+import { NewCardDialog } from '@/components/NewCardDialog'
 import { useFlashcardContext } from '@/context/FlashcardContext'
 
 /**
- * Application header with view switcher and theme toggle
+ * Application header with view switcher, new card button, and theme toggle
  */
 export const Header = () => {
   const { view, setView } = useFlashcardContext()
@@ -30,6 +31,7 @@ export const Header = () => {
             >
               Browse All
             </Button>
+            <NewCardDialog />
             <ModeToggle />
           </div>
         </div>
