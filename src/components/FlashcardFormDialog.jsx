@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus, X, Save, Trash2, Volume2 } from 'lucide-react'
+import { Plus, X, Save, Trash2, Volume2, Pencil } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -359,7 +359,7 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
           <div className="flex gap-2 ml-auto">
             {mode === 'edit' && !isEditMode ? (
               <Button onClick={() => setIsEditMode(true)} size="sm">
-                <X className="w-4 h-4 mr-2" />
+                <Pencil className="w-4 h-4 mr-2" />
                 Edit
               </Button>
             ) : (
