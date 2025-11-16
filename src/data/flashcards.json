@@ -3,60 +3,1680 @@
     "id": 1,
     "vietnamese": "Xin chào",
     "english": "Hello",
+    "example": "Xin chào! Em tên là gì?",
     "tags": ["greetings", "basics"]
   },
   {
     "id": 2,
     "vietnamese": "Cảm ơn",
     "english": "Thank you",
+    "example": "Cảm ơn anh nhiều lắm!",
     "tags": ["greetings", "basics"]
   },
   {
     "id": 3,
     "vietnamese": "Tạm biệt",
     "english": "Goodbye",
+    "example": "Tạm biệt! Hẹn gặp lại!",
     "tags": ["greetings", "basics"]
   },
   {
     "id": 4,
-    "vietnamese": "Gia đình",
-    "english": "Family",
-    "tags": ["family"]
+    "vietnamese": "Xin lỗi",
+    "english": "Sorry / Excuse me",
+    "example": "Xin lỗi, em đến muộn.",
+    "tags": ["greetings", "basics"]
   },
   {
     "id": 5,
-    "vietnamese": "Mẹ",
-    "english": "Mother",
-    "tags": ["family"]
+    "vietnamese": "Được",
+    "english": "Okay",
+    "example": "Được. Chúng ta sẽ ăn lẩu tối nay.",
+    "tags": ["basics"]
   },
   {
     "id": 6,
-    "vietnamese": "Cha",
-    "english": "Father",
-    "tags": ["family"]
+    "vietnamese": "Phải",
+    "english": "Right / Must",
+    "example": "Vâng, phải ạ.",
+    "tags": ["basics"]
   },
   {
     "id": 7,
-    "vietnamese": "Cơm",
-    "english": "Rice",
-    "tags": ["food"]
+    "vietnamese": "anh",
+    "english": "Me/you (older male relation)",
+    "example": "Anh làm việc ở 1 công ty công nghệ.",
+    "tags": ["pronouns", "basics"]
   },
   {
     "id": 8,
-    "vietnamese": "Nước",
-    "english": "Water",
-    "tags": ["food"]
+    "vietnamese": "em",
+    "english": "Me/you (younger relation)",
+    "example": "Em chỉ có 1 xe đạp thôi.",
+    "tags": ["pronouns", "basics"]
   },
   {
     "id": 9,
-    "vietnamese": "Công việc",
-    "english": "Work",
-    "tags": ["work"]
+    "vietnamese": "Chúng ta",
+    "english": "We (including listener)",
+    "example": "Chúng ta sẽ ăn lẩu tối nay.",
+    "tags": ["pronouns", "basics"]
   },
   {
     "id": 10,
-    "vietnamese": "Văn phòng",
-    "english": "Office",
+    "vietnamese": "Nào",
+    "english": "Which / What",
+    "example": "Thành phố nào?",
+    "tags": ["grammar", "basics"]
+  },
+  {
+    "id": 11,
+    "vietnamese": "Khi nào",
+    "english": "When",
+    "example": "Khi nào anh sẽ về Việt Nam?",
+    "tags": ["time", "grammar"]
+  },
+  {
+    "id": 12,
+    "vietnamese": "sẽ",
+    "english": "Will (future tense marker)",
+    "example": "Chúng ta sẽ ăn lẩu tối nay.",
+    "tags": ["grammar", "time"]
+  },
+  {
+    "id": 13,
+    "vietnamese": "Vì sao",
+    "english": "Why",
+    "example": "Vì sao anh thích Hà Nội?",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 14,
+    "vietnamese": "Vì",
+    "english": "Because",
+    "example": "Vì anh muốn nói chuyện với bà của anh nhiều hơn.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 15,
+    "vietnamese": "Vào",
+    "english": "On",
+    "example": "Vào cuối tuần, anh đi đâu?",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 16,
+    "vietnamese": "Vào cuối tuần",
+    "english": "On weekends",
+    "example": "Anh thường làm gì vào cuối tuần?",
+    "tags": ["time", "everyday"]
+  },
+  {
+    "id": 17,
+    "vietnamese": "Vừa",
+    "english": "To do something while doing something else",
+    "example": "Con vừa ăn bánh mì vừa xem phim.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 18,
+    "vietnamese": "vừa mới",
+    "english": "Just recently",
+    "example": "Anh vừa mới làm việc về.",
+    "tags": ["time"]
+  },
+  {
+    "id": 19,
+    "vietnamese": "nhé",
+    "english": "End of question, like 'okay?'",
+    "example": "Con nhớ đừng xào thịt bò lâu nhé.",
+    "tags": ["grammar", "basics"]
+  },
+  {
+    "id": 20,
+    "vietnamese": "hay là",
+    "english": "Or",
+    "example": "Em thấy trong thực đơn có nước cam, nước dừa hay nước dứa?",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 21,
+    "vietnamese": "Ngoài ra",
+    "english": "Therefore / In addition",
+    "example": "Nhà hàng này có nhiều món Việt. Ngoài ra, đồ uống được miễn phí.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 22,
+    "vietnamese": "Không những thế",
+    "english": "Therefore / In addition",
+    "example": "Không được cãi nhau. Không những thế, không được mặc quần áo màu đen.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 23,
+    "vietnamese": "lại",
+    "english": "Again",
+    "example": "Lại làm vỡ cửa sổ.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 24,
+    "vietnamese": "không ... lắm",
+    "english": "Not much of something",
+    "example": "Món này không cay lắm.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 25,
+    "vietnamese": "nhưng",
+    "english": "But",
+    "example": "Món gì cũng được, nhưng tôi rất thích nem rán.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 26,
+    "vietnamese": "chỉ",
+    "english": "Only",
+    "example": "Em chỉ có 1 xe đạp.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 27,
+    "vietnamese": "thôi",
+    "english": "Only (another way)",
+    "example": "Em có 1 xe đạp thôi.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 28,
+    "vietnamese": "bằng",
+    "english": "By (method/means)",
+    "example": "Em sẽ đi Hà Nội bằng xe buýt.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 29,
+    "vietnamese": "của",
+    "english": "Of / Possessive marker",
+    "example": "Vườn của em không có rau xanh.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 30,
+    "vietnamese": "Khi",
+    "english": "When (temporal conjunction)",
+    "example": "Khi rảnh, anh thích đọc sách.",
+    "tags": ["time", "grammar"]
+  },
+  {
+    "id": 31,
+    "vietnamese": "giờ",
+    "english": "O'clock / Hour",
+    "example": "9 giờ rưỡi.",
+    "tags": ["time"]
+  },
+  {
+    "id": 32,
+    "vietnamese": "phút",
+    "english": "Minute",
+    "example": "4 giờ 30 phút.",
+    "tags": ["time"]
+  },
+  {
+    "id": 33,
+    "vietnamese": "tiếng",
+    "english": "Hour (duration)",
+    "example": "2 tiếng.",
+    "tags": ["time"]
+  },
+  {
+    "id": 34,
+    "vietnamese": "ngày",
+    "english": "Day",
+    "example": "5 ngày.",
+    "tags": ["time"]
+  },
+  {
+    "id": 35,
+    "vietnamese": "tuần",
+    "english": "Week",
+    "example": "Anh thường đi siêu thị 2 lần / 1 tuần.",
+    "tags": ["time"]
+  },
+  {
+    "id": 36,
+    "vietnamese": "tháng",
+    "english": "Month",
+    "example": "3 tháng nữa.",
+    "tags": ["time"]
+  },
+  {
+    "id": 37,
+    "vietnamese": "lúc",
+    "english": "At the time",
+    "example": "Anh làm việc lúc 8 giờ.",
+    "tags": ["time"]
+  },
+  {
+    "id": 38,
+    "vietnamese": "sáng nay",
+    "english": "This morning",
+    "example": "Sáng nay, em đi đâu?",
+    "tags": ["time"]
+  },
+  {
+    "id": 39,
+    "vietnamese": "Lát nữa",
+    "english": "Later (but not too late)",
+    "example": "Lát nữa con nấu thức ăn nhé.",
+    "tags": ["time"]
+  },
+  {
+    "id": 40,
+    "vietnamese": "khoảng",
+    "english": "About / Approximately",
+    "example": "Mẹ sẽ họp đến khoảng 5 giờ.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 41,
+    "vietnamese": "thường",
+    "english": "Often / Usually",
+    "example": "Anh thường đi siêu thị 2 lần / 1 tuần.",
+    "tags": ["time"]
+  },
+  {
+    "id": 42,
+    "vietnamese": "Dạo này",
+    "english": "These days",
+    "example": "Dạo này anh bận lắm.",
+    "tags": ["time"]
+  },
+  {
+    "id": 43,
+    "vietnamese": "rưỡi",
+    "english": "Half (for age, time, measurements)",
+    "example": "3 tuổi rưỡi.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 44,
+    "vietnamese": "to",
+    "english": "A lot",
+    "example": "Hôm nay mưa to.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 45,
+    "vietnamese": "thêm",
+    "english": "More of something",
+    "example": "Cho anh thêm 2 bia.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 46,
+    "vietnamese": "nữa",
+    "english": "More (another way)",
+    "example": "Cho anh 1 đĩa sa lát nữa.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 47,
+    "vietnamese": "Tiếp",
+    "english": "Continue doing something",
+    "example": "Anh muốn du lịch tiếp.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 48,
+    "vietnamese": "tuổi",
+    "english": "Years old",
+    "example": "Bà Nội 95 tuổi.",
+    "tags": ["basics"]
+  },
+  {
+    "id": 49,
+    "vietnamese": "Khi rảnh",
+    "english": "When I'm free / Free time",
+    "example": "Khi rảnh, anh thích đọc sách.",
+    "tags": ["everyday", "time"]
+  },
+  {
+    "id": 50,
+    "vietnamese": "Gần hết",
+    "english": "Almost finished",
+    "example": "Công việc gần hết rồi.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 51,
+    "vietnamese": "đi họp",
+    "english": "Go to meeting",
+    "example": "Mẹ sắp đến giờ phải đi họp ở trường.",
     "tags": ["work"]
+  },
+  {
+    "id": 52,
+    "vietnamese": "trường",
+    "english": "School",
+    "example": "Mẹ đi họp ở trường.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 53,
+    "vietnamese": "đừng",
+    "english": "Do not",
+    "example": "Con nhớ đừng xào thịt bò lâu nhé.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 54,
+    "vietnamese": "chớ",
+    "english": "Do not",
+    "example": "Còn cá chép thì hãy rán vàng, chớ rán cháy.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 55,
+    "vietnamese": "hãy",
+    "english": "Should",
+    "example": "Còn cá chép thì hãy rán vàng.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 56,
+    "vietnamese": "nên",
+    "english": "Should",
+    "example": "Em nên ngủ sớm.",
+    "tags": ["grammar"]
+  },
+  {
+    "id": 57,
+    "vietnamese": "hút thuốc",
+    "english": "Smoke",
+    "example": "Bố đang hút thuốc.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 58,
+    "vietnamese": "giữ tiền",
+    "english": "Keep money",
+    "example": "Con giữ tiền cẩn thận.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 59,
+    "vietnamese": "giữ của",
+    "english": "To keep / Hold onto things",
+    "example": "Con nhớ giữ của cẩn thận.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 60,
+    "vietnamese": "hiểu",
+    "english": "Understand",
+    "example": "Tôi hiểu rồi.",
+    "tags": ["basics"]
+  },
+  {
+    "id": 61,
+    "vietnamese": "Còn tuỳ",
+    "english": "It depends",
+    "example": "Còn tuỳ. Anh phải xem lịch.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 62,
+    "vietnamese": "cắm cơm",
+    "english": "Cook rice (using rice cooker)",
+    "example": "Mẹ vừa mới cắm cơm rồi.",
+    "tags": ["food", "cooking"]
+  },
+  {
+    "id": 63,
+    "vietnamese": "nấu thức ăn",
+    "english": "Cook food",
+    "example": "Lát nữa con nấu thức ăn nhé.",
+    "tags": ["food", "cooking"]
+  },
+  {
+    "id": 64,
+    "vietnamese": "nấu ăn",
+    "english": "Cook",
+    "example": "Khi rảnh, anh thích nấu ăn.",
+    "tags": ["food", "cooking"]
+  },
+  {
+    "id": 65,
+    "vietnamese": "Món gì cũng được",
+    "english": "Anything is fine",
+    "example": "Món gì cũng được, nhưng tôi rất thích nem rán.",
+    "tags": ["food", "basics"]
+  },
+  {
+    "id": 66,
+    "vietnamese": "dùng",
+    "english": "To request a service (at nice restaurants)",
+    "example": "Anh chị có muốn dùng tráng miệng không?",
+    "tags": ["food"]
+  },
+  {
+    "id": 67,
+    "vietnamese": "Tính tiền cho em nhé",
+    "english": "Please give me the bill",
+    "example": "Tính tiền cho em nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 68,
+    "vietnamese": "tính tiền",
+    "english": "To pay (at restaurant)",
+    "example": "Cho chị hai chè sen, tính tiền cho chị nhé.",
+    "tags": ["food", "shopping"]
+  },
+  {
+    "id": 69,
+    "vietnamese": "thanh toán",
+    "english": "To pay",
+    "example": "Mẹ định thanh toán bằng thẻ hay tiền mặt?",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 70,
+    "vietnamese": "hoá đơn",
+    "english": "Bill",
+    "example": "Cho tôi xem hoá đơn.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 71,
+    "vietnamese": "ăn Tết",
+    "english": "Celebrate New Year",
+    "example": "Chúng ta sẽ ăn Tết với gia đình.",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 72,
+    "vietnamese": "Năm mới",
+    "english": "Western New Year",
+    "example": "Chúc mừng năm mới!",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 73,
+    "vietnamese": "Tết Tây",
+    "english": "Western New Year",
+    "example": "Tết Tây là ngày 1 tháng 1.",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 74,
+    "vietnamese": "bánh trung thu",
+    "english": "Mooncakes",
+    "example": "Em họ tặng anh bánh trung thu.",
+    "tags": ["food", "holidays"]
+  },
+  {
+    "id": 75,
+    "vietnamese": "Tết Trung Thu",
+    "english": "Mid-autumn festival",
+    "example": "Tết Trung Thu, trẻ em ăn bánh trung thu.",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 76,
+    "vietnamese": "Giáng Sinh",
+    "english": "Christmas",
+    "example": "Chúc mừng Giáng Sinh!",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 77,
+    "vietnamese": "No-En",
+    "english": "Christmas",
+    "example": "Anh đi đâu vào No-En?",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 78,
+    "vietnamese": "Mừng Thọ",
+    "english": "Special birthday for elders",
+    "example": "Chúng ta sẽ làm tiệc Mừng Thọ cho bà.",
+    "tags": ["holidays", "family"]
+  },
+  {
+    "id": 79,
+    "vietnamese": "Thời tiết",
+    "english": "Weather",
+    "example": "Hôm nay thời tiết thế nào?",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 80,
+    "vietnamese": "độ",
+    "english": "Degrees",
+    "example": "Hôm nay 28 độ.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 81,
+    "vietnamese": "về",
+    "english": "Go home",
+    "example": "Anh vừa mới làm việc về.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 82,
+    "vietnamese": "đi bộ",
+    "english": "Walk",
+    "example": "Khi rảnh, anh thích đi bộ.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 83,
+    "vietnamese": "đi dạo",
+    "english": "Take a walk",
+    "example": "Khi rảnh, anh thích đi dạo.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 84,
+    "vietnamese": "đọc sách",
+    "english": "Read a book",
+    "example": "Khi rảnh, anh thích đọc sách.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 85,
+    "vietnamese": "đi chơi",
+    "english": "Go out",
+    "example": "Cuối tuần, chúng ta đi chơi nhé?",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 86,
+    "vietnamese": "thể thao",
+    "english": "Sports",
+    "example": "Anh thích chơi thể thao.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 87,
+    "vietnamese": "đi vào",
+    "english": "Come inside",
+    "example": "Mời anh đi vào.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 88,
+    "vietnamese": "đi ra ngoài",
+    "english": "Go outside",
+    "example": "Con chó đào hố để đi ra ngoài.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 89,
+    "vietnamese": "cuối tuần",
+    "english": "Weekend",
+    "example": "Anh thường làm gì vào cuối tuần?",
+    "tags": ["time"]
+  },
+  {
+    "id": 90,
+    "vietnamese": "sức khoẻ",
+    "english": "Health",
+    "example": "Sức khoẻ của bà thế nào?",
+    "tags": ["health"]
+  },
+  {
+    "id": 91,
+    "vietnamese": "âm nhạc",
+    "english": "Music",
+    "example": "Em thích âm nhạc.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 92,
+    "vietnamese": "nghe nhạc",
+    "english": "Listen to music",
+    "example": "Khi rảnh, em thích nghe nhạc.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 93,
+    "vietnamese": "sinh nhật",
+    "english": "Birthday",
+    "example": "Tuần sau là sinh nhật của mẹ.",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 94,
+    "vietnamese": "Bà Nội",
+    "english": "Paternal grandmother",
+    "example": "Bà Nội 95 tuổi.",
+    "tags": ["family"]
+  },
+  {
+    "id": 95,
+    "vietnamese": "gia đình",
+    "english": "Family",
+    "example": "Gia đình anh có bao nhiêu người?",
+    "tags": ["family"]
+  },
+  {
+    "id": 96,
+    "vietnamese": "Em họ",
+    "english": "Younger cousin",
+    "example": "Em họ tặng anh bánh trung thu.",
+    "tags": ["family"]
+  },
+  {
+    "id": 97,
+    "vietnamese": "Mẹ",
+    "english": "Mother",
+    "example": "Mẹ đi họp ở trường.",
+    "tags": ["family"]
+  },
+  {
+    "id": 98,
+    "vietnamese": "Cha",
+    "english": "Father",
+    "example": "Cha anh làm gì?",
+    "tags": ["family"]
+  },
+  {
+    "id": 99,
+    "vietnamese": "Bố",
+    "english": "Dad",
+    "example": "Bố đang hút thuốc.",
+    "tags": ["family"]
+  },
+  {
+    "id": 100,
+    "vietnamese": "Mùa đông",
+    "english": "Winter",
+    "example": "Khi nào anh sẽ về Việt Nam? Mùa đông năm sau.",
+    "tags": ["time"]
+  },
+  {
+    "id": 101,
+    "vietnamese": "thành phố",
+    "english": "City",
+    "example": "Anh sống ở thành phố nào?",
+    "tags": ["places"]
+  },
+  {
+    "id": 102,
+    "vietnamese": "mưa",
+    "english": "Rain",
+    "example": "Hôm nay mưa to.",
+    "tags": ["weather"]
+  },
+  {
+    "id": 103,
+    "vietnamese": "công viên",
+    "english": "Park",
+    "example": "Hôm nay anh đi công viên với con chó.",
+    "tags": ["places"]
+  },
+  {
+    "id": 104,
+    "vietnamese": "cửa hàng",
+    "english": "Shop",
+    "example": "Cửa hàng ở đâu?",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 105,
+    "vietnamese": "du lịch",
+    "english": "Travel",
+    "example": "2 tuần nữa, cô ấy sẽ du lịch Việt Nam.",
+    "tags": ["travel"]
+  },
+  {
+    "id": 106,
+    "vietnamese": "chả giò",
+    "english": "Fried spring rolls (Southern)",
+    "example": "Anh thích chả giò lắm.",
+    "tags": ["food"]
+  },
+  {
+    "id": 107,
+    "vietnamese": "nem rán",
+    "english": "Fried spring rolls (Northern)",
+    "example": "Em nghe mẹ nói có 4 món chính là nem rán, thịt bò xào dứa, tôm hấp, gà rán.",
+    "tags": ["food"]
+  },
+  {
+    "id": 108,
+    "vietnamese": "thịt gà xào xả ớt",
+    "english": "Chicken stir-fried with lemongrass and chili",
+    "example": "Hôm nay mẹ nấu thịt gà xào xả ớt.",
+    "tags": ["food"]
+  },
+  {
+    "id": 109,
+    "vietnamese": "thịt kho tàu",
+    "english": "Braised meat",
+    "example": "Thịt kho tàu rất ngon.",
+    "tags": ["food"]
+  },
+  {
+    "id": 110,
+    "vietnamese": "đồ nướng",
+    "english": "BBQ",
+    "example": "Anh thích ăn đồ nướng.",
+    "tags": ["food"]
+  },
+  {
+    "id": 111,
+    "vietnamese": "cá hồi",
+    "english": "Salmon",
+    "example": "Cá hồi rất tươi.",
+    "tags": ["food"]
+  },
+  {
+    "id": 112,
+    "vietnamese": "cá chép",
+    "english": "Carp",
+    "example": "Còn cá chép thì hãy rán vàng.",
+    "tags": ["food"]
+  },
+  {
+    "id": 113,
+    "vietnamese": "hoa quả",
+    "english": "Fruit",
+    "example": "Trên đường về, mẹ sẽ mua hoa quả để ăn tráng miệng.",
+    "tags": ["food"]
+  },
+  {
+    "id": 114,
+    "vietnamese": "tráng miệng",
+    "english": "Dessert",
+    "example": "Anh chị có muốn dùng tráng miệng không?",
+    "tags": ["food"]
+  },
+  {
+    "id": 115,
+    "vietnamese": "hái quả",
+    "english": "Pick fruit",
+    "example": "Buổi chiều, chúng ta đi hái quả.",
+    "tags": ["food"]
+  },
+  {
+    "id": 116,
+    "vietnamese": "hái rau",
+    "english": "Pick vegetables",
+    "example": "Bà đi hái rau trong vườn.",
+    "tags": ["food"]
+  },
+  {
+    "id": 117,
+    "vietnamese": "cháo trứng",
+    "english": "Egg congee",
+    "example": "Sáng nay ăn cháo trứng.",
+    "tags": ["food"]
+  },
+  {
+    "id": 118,
+    "vietnamese": "thực đơn",
+    "english": "Menu",
+    "example": "Cho chúng tôi xem thực đơn.",
+    "tags": ["food"]
+  },
+  {
+    "id": 119,
+    "vietnamese": "bị dị ứng",
+    "english": "Allergy",
+    "example": "Em bị dị ứng hải sản.",
+    "tags": ["health", "food"]
+  },
+  {
+    "id": 120,
+    "vietnamese": "mời",
+    "english": "Invite someone",
+    "example": "Mẹ thường mời mọi người đến nhà.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 121,
+    "vietnamese": "đặt bàn",
+    "english": "Reservation",
+    "example": "Anh muốn đặt bàn cho 4 người.",
+    "tags": ["food"]
+  },
+  {
+    "id": 122,
+    "vietnamese": "thanh toán bằng thẻ",
+    "english": "Pay by card",
+    "example": "Anh thanh toán bằng thẻ.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 123,
+    "vietnamese": "thanh toán bằng tiền mặt",
+    "english": "Pay by cash",
+    "example": "Mẹ trả bằng tiền mặt cho nhanh.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 124,
+    "vietnamese": "hải sản",
+    "english": "Seafood",
+    "example": "Mẹ muốn mua một ít hải sản.",
+    "tags": ["food"]
+  },
+  {
+    "id": 125,
+    "vietnamese": "công ty",
+    "english": "Company",
+    "example": "Anh làm việc ở 1 công ty công nghệ.",
+    "tags": ["work"]
+  },
+  {
+    "id": 126,
+    "vietnamese": "Công nghệ",
+    "english": "Technology",
+    "example": "Anh làm việc ở 1 công ty công nghệ.",
+    "tags": ["work"]
+  },
+  {
+    "id": 127,
+    "vietnamese": "kĩ sư",
+    "english": "Engineer",
+    "example": "Anh là kĩ sư phần mềm.",
+    "tags": ["work"]
+  },
+  {
+    "id": 128,
+    "vietnamese": "giáo viên",
+    "english": "Teacher",
+    "example": "Chị ấy là giáo viên.",
+    "tags": ["work"]
+  },
+  {
+    "id": 129,
+    "vietnamese": "làm việc bù đầu",
+    "english": "Work overtime, overwork",
+    "example": "Tuần này anh làm việc bù đầu.",
+    "tags": ["work"]
+  },
+  {
+    "id": 130,
+    "vietnamese": "Áp lực",
+    "english": "Stress",
+    "example": "Công việc có nhiều áp lực.",
+    "tags": ["work", "health"]
+  },
+  {
+    "id": 131,
+    "vietnamese": "cuốn sách",
+    "english": "Book",
+    "example": "Em nghĩ, em sẽ tặng bà 1 cuốn sách.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 132,
+    "vietnamese": "Cơm",
+    "english": "Rice",
+    "example": "Sau khi ăn cơm, Hương giúp bà rửa bát.",
+    "tags": ["food"]
+  },
+  {
+    "id": 133,
+    "vietnamese": "Nước",
+    "english": "Water",
+    "example": "Cho tôi một ly nước.",
+    "tags": ["food"]
+  },
+  {
+    "id": 134,
+    "vietnamese": "nước cam",
+    "english": "Orange juice",
+    "example": "Cho chị cốc nước cam.",
+    "tags": ["food"]
+  },
+  {
+    "id": 135,
+    "vietnamese": "nước dừa",
+    "english": "Coconut juice",
+    "example": "Em thấy trong thực đơn có nước cam, nước dừa hay nước dứa?",
+    "tags": ["food"]
+  },
+  {
+    "id": 136,
+    "vietnamese": "nước dứa",
+    "english": "Pineapple juice",
+    "example": "Em muốn uống nước dứa.",
+    "tags": ["food"]
+  },
+  {
+    "id": 137,
+    "vietnamese": "thịt bò",
+    "english": "Beef",
+    "example": "Con nhớ đừng xào thịt bò lâu nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 138,
+    "vietnamese": "thịt bò xào dứa",
+    "english": "Stir-fried beef with pineapple",
+    "example": "Em nghe mẹ nói có món thịt bò xào dứa.",
+    "tags": ["food"]
+  },
+  {
+    "id": 139,
+    "vietnamese": "tôm hấp",
+    "english": "Steamed shrimp",
+    "example": "Tôm hấp rất ngon.",
+    "tags": ["food"]
+  },
+  {
+    "id": 140,
+    "vietnamese": "gà rán",
+    "english": "Fried chicken",
+    "example": "Con thích ăn gà rán.",
+    "tags": ["food"]
+  },
+  {
+    "id": 141,
+    "vietnamese": "canh cà chua",
+    "english": "Tomato soup",
+    "example": "Ngoài ra, còn có canh cà chua.",
+    "tags": ["food"]
+  },
+  {
+    "id": 142,
+    "vietnamese": "khoai tây chiên",
+    "english": "Fried potatoes",
+    "example": "Còn có khoai tây chiên nữa.",
+    "tags": ["food"]
+  },
+  {
+    "id": 143,
+    "vietnamese": "rau bí xào tỏi",
+    "english": "Stir-fried squash with garlic",
+    "example": "Hôm nay mẹ nấu rau bí xào tỏi.",
+    "tags": ["food"]
+  },
+  {
+    "id": 144,
+    "vietnamese": "đi chợ",
+    "english": "Go to the market",
+    "example": "Chiều nay mẹ và dì sẽ đi chợ mua thức ăn.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 145,
+    "vietnamese": "siêu thị",
+    "english": "Supermarket",
+    "example": "Anh thường đi siêu thị 2 lần / 1 tuần.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 146,
+    "vietnamese": "giỏ đựng hàng",
+    "english": "Basket",
+    "example": "Mẹ con mình lấy giỏ đựng hàng hay xe đẩy ạ?",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 147,
+    "vietnamese": "xe đẩy",
+    "english": "Shopping cart / Trolley",
+    "example": "Giỏ đựng hàng thôi con ạ, vì hôm nay mình không cần mua nhiều thức ăn lắm.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 148,
+    "vietnamese": "quầy",
+    "english": "Counter / Stall",
+    "example": "Đến quầy thực phẩm tươi.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 149,
+    "vietnamese": "thực phẩm tươi",
+    "english": "Fresh food",
+    "example": "Đến quầy thực phẩm tươi, mua thịt bò trước đi con.",
+    "tags": ["food", "shopping"]
+  },
+  {
+    "id": 150,
+    "vietnamese": "thực phẩm đông lạnh",
+    "english": "Frozen food",
+    "example": "Sau đó mình sang quầy thực phẩm đông lạnh.",
+    "tags": ["food", "shopping"]
+  },
+  {
+    "id": 151,
+    "vietnamese": "cá biển",
+    "english": "Sea fish",
+    "example": "Ôi, cá biển và tôm ở kia tươi quá.",
+    "tags": ["food"]
+  },
+  {
+    "id": 152,
+    "vietnamese": "tôm",
+    "english": "Shrimp",
+    "example": "Cá biển và tôm ở kia tươi quá.",
+    "tags": ["food"]
+  },
+  {
+    "id": 153,
+    "vietnamese": "cà chua",
+    "english": "Tomatoes",
+    "example": "Con sang quầy rau quả, lấy cà chua, rau thơm và hành nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 154,
+    "vietnamese": "rau thơm",
+    "english": "Herbs",
+    "example": "Lấy cà chua, rau thơm và hành nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 155,
+    "vietnamese": "hành",
+    "english": "Onions",
+    "example": "Lấy cà chua, rau thơm và hành nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 156,
+    "vietnamese": "xếp hàng",
+    "english": "Line up / Queue",
+    "example": "Mua nhanh nhé, để còn ra quầy thanh toán xếp hàng.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 157,
+    "vietnamese": "thẻ khách hàng",
+    "english": "Customer card",
+    "example": "Con có mang thẻ khách hàng không?",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 158,
+    "vietnamese": "tiền mặt",
+    "english": "Cash",
+    "example": "Mẹ trả bằng tiền mặt cho nhanh.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 159,
+    "vietnamese": "trà sữa",
+    "english": "Milk tea",
+    "example": "Em muốn uống trà sữa.",
+    "tags": ["food"]
+  },
+  {
+    "id": 160,
+    "vietnamese": "trà sữa khoai môn",
+    "english": "Taro milk tea",
+    "example": "Cho em một ly trà sữa khoai môn.",
+    "tags": ["food"]
+  },
+  {
+    "id": 161,
+    "vietnamese": "rửa bát",
+    "english": "Wash dishes",
+    "example": "Sau khi ăn cơm, Hương giúp bà rửa bát.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 162,
+    "vietnamese": "ngoan",
+    "english": "Well-behaved / Good",
+    "example": "Bà nói, Hương rất ngoan.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 163,
+    "vietnamese": "tưới nước",
+    "english": "Water (plants)",
+    "example": "Buổi chiều, Hương giúp ông tưới nước cho hoa ở trong vườn.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 164,
+    "vietnamese": "vườn",
+    "english": "Garden",
+    "example": "Hương giúp ông tưới nước cho hoa ở trong vườn.",
+    "tags": ["places"]
+  },
+  {
+    "id": 165,
+    "vietnamese": "đón",
+    "english": "Pick up",
+    "example": "Lúc 5h mẹ Hương đến đón Hương về nhà.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 166,
+    "vietnamese": "lẩu",
+    "english": "Hot pot",
+    "example": "Chúng ta sẽ ăn lẩu tối nay.",
+    "tags": ["food"]
+  },
+  {
+    "id": 167,
+    "vietnamese": "Lẩu Thái",
+    "english": "Thai hot pot",
+    "example": "Được. Chúng ta sẽ ăn lẩu Thái tối nay.",
+    "tags": ["food"]
+  },
+  {
+    "id": 168,
+    "vietnamese": "rau xanh",
+    "english": "Green vegetables",
+    "example": "Vườn của em không có rau xanh.",
+    "tags": ["food"]
+  },
+  {
+    "id": 169,
+    "vietnamese": "chụp hình",
+    "english": "Take photos",
+    "example": "Sở thích của bố là chụp hình.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 170,
+    "vietnamese": "chụp ảnh",
+    "english": "Take photos",
+    "example": "Bố thích chụp ảnh.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 171,
+    "vietnamese": "sở thích",
+    "english": "Hobby / Interest",
+    "example": "Sở thích của bố là chụp hình.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 172,
+    "vietnamese": "câu lạc bộ",
+    "english": "Club",
+    "example": "Câu lạc bộ của bố thường đi đâu?",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 173,
+    "vietnamese": "Bắn pháo hoa",
+    "english": "Shoot fireworks",
+    "example": "Tết Trung Thu, mọi người bắn pháo hoa.",
+    "tags": ["holidays"]
+  },
+  {
+    "id": 174,
+    "vietnamese": "có lẽ",
+    "english": "Maybe",
+    "example": "Có lẽ anh sẽ đi.",
+    "tags": ["basics"]
+  },
+  {
+    "id": 175,
+    "vietnamese": "tiếc là",
+    "english": "Unfortunately",
+    "example": "Anh thích đọc sách lắm nhưng mà tiếc là anh không có thời gian.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 176,
+    "vietnamese": "thời gian",
+    "english": "Time",
+    "example": "Anh không có thời gian.",
+    "tags": ["time"]
+  },
+  {
+    "id": 177,
+    "vietnamese": "rừng",
+    "english": "Forest",
+    "example": "Hai anh em muốn đi vào rừng.",
+    "tags": ["places"]
+  },
+  {
+    "id": 178,
+    "vietnamese": "bản đồ",
+    "english": "Map",
+    "example": "Họ mang theo bản đồ nhưng vẫn bị lạc.",
+    "tags": ["travel"]
+  },
+  {
+    "id": 179,
+    "vietnamese": "hố",
+    "english": "Hole",
+    "example": "Hai anh em nhìn thấy một cái hố rất to.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 180,
+    "vietnamese": "khách sạn",
+    "english": "Hotel",
+    "example": "Anh ấy ở khách sạn Tây Hồ.",
+    "tags": ["travel"]
+  },
+  {
+    "id": 181,
+    "vietnamese": "phòng",
+    "english": "Room",
+    "example": "Phòng khách sạn bao nhiêu tiền một đêm?",
+    "tags": ["travel"]
+  },
+  {
+    "id": 182,
+    "vietnamese": "rẻ",
+    "english": "Cheap",
+    "example": "Khách sạn này rẻ lắm.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 183,
+    "vietnamese": "đắt",
+    "english": "Expensive",
+    "example": "Món này không đắt lắm.",
+    "tags": ["shopping"]
+  },
+  {
+    "id": 184,
+    "vietnamese": "ăn sáng",
+    "english": "Breakfast",
+    "example": "Giá phòng gồm ăn sáng không?",
+    "tags": ["food"]
+  },
+  {
+    "id": 185,
+    "vietnamese": "bơi",
+    "english": "Swim",
+    "example": "Anh ấy không bơi vì rất lạnh.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 186,
+    "vietnamese": "lạnh",
+    "english": "Cold",
+    "example": "Anh ấy không bơi vì rất lạnh.",
+    "tags": ["weather"]
+  },
+  {
+    "id": 187,
+    "vietnamese": "nóng",
+    "english": "Hot",
+    "example": "Hôm nay trời nóng thật.",
+    "tags": ["weather"]
+  },
+  {
+    "id": 188,
+    "vietnamese": "liên hoan",
+    "english": "Party / Celebration",
+    "example": "Anh Nam muốn liên hoan trước khi chị Lan nghỉ việc.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 189,
+    "vietnamese": "liên hoan chia tay",
+    "english": "Farewell party",
+    "example": "Mọi người muốn nấu ăn để liên hoan chia tay Hà.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 190,
+    "vietnamese": "kế hoạch",
+    "english": "Plan",
+    "example": "Có kế hoạch gì?",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 191,
+    "vietnamese": "yên tâm",
+    "english": "Rest assured / At ease",
+    "example": "Mọi người không uống rượu. Anh yên tâm.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 192,
+    "vietnamese": "uống rượu",
+    "english": "Drink alcohol",
+    "example": "Anh không uống nhiều rượu.",
+    "tags": ["food"]
+  },
+  {
+    "id": 193,
+    "vietnamese": "bị say rượu",
+    "english": "Get drunk",
+    "example": "Anh ấy bị say rượu.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 194,
+    "vietnamese": "mua vé",
+    "english": "Buy tickets",
+    "example": "Chúng ta phải mua vé trước.",
+    "tags": ["travel"]
+  },
+  {
+    "id": 195,
+    "vietnamese": "Sức khoẻ",
+    "english": "Health",
+    "example": "Sức khoẻ của anh thế nào?",
+    "tags": ["health"]
+  },
+  {
+    "id": 196,
+    "vietnamese": "Bệnh tật",
+    "english": "Illness / Sickness",
+    "example": "Bệnh tật làm anh rất mệt.",
+    "tags": ["health"]
+  },
+  {
+    "id": 197,
+    "vietnamese": "Nhà thuốc",
+    "english": "Pharmacy",
+    "example": "Nhà thuốc ở gần, anh sẽ đi bộ đến đó.",
+    "tags": ["health"]
+  },
+  {
+    "id": 198,
+    "vietnamese": "bị sốt",
+    "english": "Have a fever",
+    "example": "Anh ấy bị sốt 39 độ.",
+    "tags": ["health"]
+  },
+  {
+    "id": 199,
+    "vietnamese": "uống thuốc",
+    "english": "Take medicine",
+    "example": "Anh ấy bị sốt nhưng mà anh ấy không uống thuốc.",
+    "tags": ["health"]
+  },
+  {
+    "id": 200,
+    "vietnamese": "ăn bẩn",
+    "english": "Eat dirty/unhygienic food",
+    "example": "Vì anh ấy ăn bẩn, anh ấy bị đau bụng.",
+    "tags": ["health", "food"]
+  },
+  {
+    "id": 201,
+    "vietnamese": "đau bụng",
+    "english": "Stomachache",
+    "example": "Vì anh ấy ăn bẩn, anh ấy bị đau bụng.",
+    "tags": ["health"]
+  },
+  {
+    "id": 202,
+    "vietnamese": "tai nạn",
+    "english": "Accident",
+    "example": "Vì anh ấy bị tai nạn, anh ấy bị gãy chân.",
+    "tags": ["health"]
+  },
+  {
+    "id": 203,
+    "vietnamese": "gãy chân",
+    "english": "Broken leg",
+    "example": "Vì anh ấy bị tai nạn, anh ấy bị gãy chân.",
+    "tags": ["health"]
+  },
+  {
+    "id": 204,
+    "vietnamese": "đau đầu",
+    "english": "Headache",
+    "example": "Chị ấy làm việc bù đầu nên chị bị đau đầu.",
+    "tags": ["health"]
+  },
+  {
+    "id": 205,
+    "vietnamese": "bị cảm",
+    "english": "Have a cold",
+    "example": "Anh ấy bị cảm. Nên anh ấy phải uống nhiều trà.",
+    "tags": ["health"]
+  },
+  {
+    "id": 206,
+    "vietnamese": "cảm lạnh",
+    "english": "Common cold",
+    "example": "Em bị cảm lạnh.",
+    "tags": ["health"]
+  },
+  {
+    "id": 207,
+    "vietnamese": "đau lưng",
+    "english": "Back pain",
+    "example": "Bà rất cao tuổi nên bà thường bị đau lưng.",
+    "tags": ["health"]
+  },
+  {
+    "id": 208,
+    "vietnamese": "bác sĩ",
+    "english": "Doctor",
+    "example": "Bác sĩ cho đơn thuốc.",
+    "tags": ["health"]
+  },
+  {
+    "id": 209,
+    "vietnamese": "phẫu thuật",
+    "english": "Surgery",
+    "example": "Vì anh ấy không có tiền, bác sĩ không thể làm phẫu thuật cho anh ấy.",
+    "tags": ["health"]
+  },
+  {
+    "id": 210,
+    "vietnamese": "mổ",
+    "english": "Surgery / Operate",
+    "example": "Bác sĩ phải mổ.",
+    "tags": ["health"]
+  },
+  {
+    "id": 211,
+    "vietnamese": "đau dạ dày",
+    "english": "Stomach pain / Gastric pain",
+    "example": "Anh ấy bị đau dạ dày.",
+    "tags": ["health"]
+  },
+  {
+    "id": 212,
+    "vietnamese": "khó chịu",
+    "english": "Uncomfortable",
+    "example": "Khi nào anh ấy thấy khó chịu?",
+    "tags": ["health"]
+  },
+  {
+    "id": 213,
+    "vietnamese": "đói",
+    "english": "Hungry",
+    "example": "Khi đói, anh ấy thấy khó chịu.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 214,
+    "vietnamese": "chua",
+    "english": "Sour",
+    "example": "Bác sĩ bảo anh ấy không được ăn chua.",
+    "tags": ["food"]
+  },
+  {
+    "id": 215,
+    "vietnamese": "cay",
+    "english": "Spicy",
+    "example": "Món này không cay lắm.",
+    "tags": ["food"]
+  },
+  {
+    "id": 216,
+    "vietnamese": "đơn thuốc",
+    "english": "Prescription",
+    "example": "Bác sĩ cho đơn thuốc.",
+    "tags": ["health"]
+  },
+  {
+    "id": 217,
+    "vietnamese": "thức khuya",
+    "english": "Stay up late",
+    "example": "Bác sĩ bảo anh ấy không được thức khuya.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 218,
+    "vietnamese": "kiêng",
+    "english": "Avoid / Abstain from",
+    "example": "Kiêng = không được làm.",
+    "tags": ["health"]
+  },
+  {
+    "id": 219,
+    "vietnamese": "ăn lành mạnh",
+    "english": "Eat healthy",
+    "example": "Bác sĩ bảo anh ấy phải ăn lành mạnh.",
+    "tags": ["health", "food"]
+  },
+  {
+    "id": 220,
+    "vietnamese": "khám",
+    "english": "Examine / Check-up",
+    "example": "Khi nào anh ấy phải đến khám lại?",
+    "tags": ["health"]
+  },
+  {
+    "id": 221,
+    "vietnamese": "Phở",
+    "english": "Pho (Vietnamese noodle soup)",
+    "example": "Hôm nay ăn phở nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 222,
+    "vietnamese": "xôi đậu",
+    "english": "Sticky rice with beans",
+    "example": "Sáng nay ăn xôi đậu.",
+    "tags": ["food"]
+  },
+  {
+    "id": 223,
+    "vietnamese": "sườn chua ngọt",
+    "english": "Sweet and sour ribs",
+    "example": "Anh thích sườn chua ngọt.",
+    "tags": ["food"]
+  },
+  {
+    "id": 224,
+    "vietnamese": "canh chua",
+    "english": "Sour soup",
+    "example": "Hôm nay mẹ nấu canh chua.",
+    "tags": ["food"]
+  },
+  {
+    "id": 225,
+    "vietnamese": "chè sen",
+    "english": "Lotus seed sweet soup",
+    "example": "Cho chị hai chè sen.",
+    "tags": ["food"]
+  },
+  {
+    "id": 226,
+    "vietnamese": "Pepsi lạnh",
+    "english": "Cold Pepsi",
+    "example": "Cho tôi một Pepsi lạnh.",
+    "tags": ["food"]
+  },
+  {
+    "id": 227,
+    "vietnamese": "nước chanh",
+    "english": "Lemonade",
+    "example": "Cho chị thêm một nước chanh nữa nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 228,
+    "vietnamese": "salad",
+    "english": "Salad",
+    "example": "Cho chị một salad.",
+    "tags": ["food"]
+  },
+  {
+    "id": 229,
+    "vietnamese": "bít tết",
+    "english": "Steak",
+    "example": "Cho chị hai thịt bò bít tết nhé.",
+    "tags": ["food"]
+  },
+  {
+    "id": 230,
+    "vietnamese": "làm vỡ",
+    "english": "Break / Shatter",
+    "example": "Lại làm vỡ cửa sổ.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 231,
+    "vietnamese": "cửa sổ",
+    "english": "Window",
+    "example": "Lại làm vỡ cửa sổ.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 232,
+    "vietnamese": "đánh",
+    "english": "Hit / Beat",
+    "example": "Bố đánh con.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 233,
+    "vietnamese": "ăn đòn",
+    "english": "Get beaten",
+    "example": "Con ăn đòn.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 234,
+    "vietnamese": "chờ",
+    "english": "Wait",
+    "example": "Chờ em một lát.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 235,
+    "vietnamese": "đợi",
+    "english": "Wait",
+    "example": "Chị đợi em một lát.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 236,
+    "vietnamese": "tìm",
+    "english": "Search / Look for",
+    "example": "Anh tìm gì?",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 237,
+    "vietnamese": "ôm",
+    "english": "Hug",
+    "example": "Mẹ ôm con.",
+    "tags": ["everyday"]
+  },
+  {
+    "id": 238,
+    "vietnamese": "xe buýt",
+    "english": "Bus",
+    "example": "Em sẽ đi Hà Nội bằng xe buýt.",
+    "tags": ["travel"]
+  },
+  {
+    "id": 239,
+    "vietnamese": "xe đạp",
+    "english": "Bicycle",
+    "example": "Em chỉ có 1 xe đạp thôi.",
+    "tags": ["travel"]
+  },
+  {
+    "id": 240,
+    "vietnamese": "Hà Nội",
+    "english": "Hanoi",
+    "example": "Khi nào anh sẽ về Hà Nội?",
+    "tags": ["places"]
   }
 ]

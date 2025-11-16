@@ -19,6 +19,40 @@ A lightweight, browser-based flash card application for learning Vietnamese.
 npm install
 ```
 
+### Google Cloud Text-to-Speech Setup
+
+This app uses Google Cloud Text-to-Speech API for high-quality Vietnamese pronunciation.
+
+1. **Create a Google Cloud Project**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select an existing one
+
+2. **Enable the Text-to-Speech API**
+   - Navigate to "APIs & Services" > "Library"
+   - Search for "Cloud Text-to-Speech API"
+   - Click "Enable"
+
+3. **Create an API Key**
+   - Go to "APIs & Services" > "Credentials"
+   - Click "Create Credentials" > "API Key"
+   - Copy the generated API key
+
+4. **Add API Key to Your Project**
+   - Copy `.env.example` to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Edit `.env` and add your API key:
+     ```
+     VITE_GOOGLE_CLOUD_API_KEY=your_api_key_here
+     ```
+
+5. **Restrict Your API Key (Recommended)**
+   - In the API key settings, restrict the key to only "Cloud Text-to-Speech API"
+   - Add HTTP referrer restrictions (e.g., `http://localhost:5173/*`)
+
+**Note:** The app will fall back to the browser's built-in text-to-speech if no API key is provided.
+
 ### Development
 
 ```bash
@@ -59,7 +93,7 @@ To add new cards, simply edit this file and add more entries to the array.
 - **React** - UI framework
 - **Vite** - Build tool and dev server
 - **Tailwind CSS** - Styling
-- **Web Speech API** - Audio pronunciation
+- **Google Cloud Text-to-Speech API** - High-quality Vietnamese audio pronunciation
 
 ## Usage
 

@@ -7,6 +7,7 @@ function App() {
   const [isFlipped, setIsFlipped] = useState(false)
   const [view, setView] = useState('study') // 'study' or 'browse'
   const [selectedTags, setSelectedTags] = useState([])
+  const [audioCache, setAudioCache] = useState({}) // Cache for audio URLs
 
   // Get all unique tags
   const allTags = [...new Set(flashcards.flatMap(card => card.tags))].sort()
@@ -38,11 +39,85 @@ function App() {
     }, 200)
   }
 
-  // Play audio using Google Translate TTS
-  const playAudio = (text) => {
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.lang = 'vi-VN'
-    speechSynthesis.speak(utterance)
+  // Play audio using Google Cloud Text-to-Speech API
+  const playAudio = async (text) => {
+    try {
+      // Check if audio is already cached
+      if (audioCache[text]) {
+        const audio = new Audio(audioCache[text])
+        audio.play()
+        return
+      }
+
+      const apiKey = import.meta.env.VITE_GOOGLE_CLOUD_API_KEY
+
+      if (!apiKey) {
+        console.error('Google Cloud API key not found. Please add VITE_GOOGLE_CLOUD_API_KEY to your .env file')
+        // Fallback to Web Speech API
+        const utterance = new SpeechSynthesisUtterance(text)
+        utterance.lang = 'vi-VN'
+        speechSynthesis.speak(utterance)
+        return
+      }
+
+      const response = await fetch(
+        `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            input: { text },
+            voice: {
+              languageCode: 'vi-VN',
+              name: 'vi-VN-Wavenet-A', // High quality Vietnamese female voice
+              ssmlGender: 'FEMALE'
+            },
+            audioConfig: {
+              audioEncoding: 'MP3',
+              pitch: 0,
+              speakingRate: 0.9 // Slightly slower for learning
+            }
+          })
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status}`)
+      }
+
+      const data = await response.json()
+      const audioContent = data.audioContent
+
+      // Convert base64 to blob URL
+      const audioBlob = base64ToBlob(audioContent, 'audio/mp3')
+      const audioUrl = URL.createObjectURL(audioBlob)
+
+      // Cache the audio URL
+      setAudioCache(prev => ({ ...prev, [text]: audioUrl }))
+
+      // Play the audio
+      const audio = new Audio(audioUrl)
+      audio.play()
+    } catch (error) {
+      console.error('Error playing audio:', error)
+      // Fallback to Web Speech API
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = 'vi-VN'
+      speechSynthesis.speak(utterance)
+    }
+  }
+
+  // Helper function to convert base64 to blob
+  const base64ToBlob = (base64, mimeType) => {
+    const byteCharacters = atob(base64)
+    const byteNumbers = new Array(byteCharacters.length)
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i)
+    }
+    const byteArray = new Uint8Array(byteNumbers)
+    return new Blob([byteArray], { type: mimeType })
   }
 
   // Toggle tag filter
@@ -168,6 +243,13 @@ function App() {
                       </button>
                     )}
 
+                    {currentCard.example && (
+                      <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                        <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
+                        <p className="text-sm text-gray-700 italic">{currentCard.example}</p>
+                      </div>
+                    )}
+
                     <div className="mt-6 flex flex-wrap gap-1 justify-center">
                       {currentCard.tags.map(tag => (
                         <span
@@ -232,6 +314,13 @@ function App() {
                   <p className="text-sm text-gray-500 mb-1">English</p>
                   <p className="text-lg text-gray-700">{card.english}</p>
                 </div>
+
+                {card.example && (
+                  <div className="mb-4 p-3 bg-blue-50 rounded border border-blue-200">
+                    <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
+                    <p className="text-sm text-gray-700 italic">{card.example}</p>
+                  </div>
+                )}
 
                 <div className="flex flex-wrap gap-1">
                   {card.tags.map(tag => (
