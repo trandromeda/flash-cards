@@ -90,11 +90,45 @@ function App() {
 
   // Fetch and update background image from Unsplash every minute
   useEffect(() => {
-    const updateBackground = () => {
-      // Add timestamp to prevent caching and get a new image each time
-      const timestamp = new Date().getTime()
-      const imageUrl = `https://source.unsplash.com/1920x1080/?vietnam,hanoi,saigon,landscape&${timestamp}`
-      setBackgroundImage(imageUrl)
+    // Curated list of beautiful Vietnam landscape photos from Unsplash
+    const vietnamPhotos = [
+      'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1920&h=1080&fit=crop', // Ha Long Bay
+      'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=1920&h=1080&fit=crop', // Hoi An
+      'https://images.unsplash.com/photo-1528127269322-539801943592?w=1920&h=1080&fit=crop', // Rice terraces
+      'https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=1920&h=1080&fit=crop', // Hanoi street
+      'https://images.unsplash.com/photo-1555227063-82e15fcf5ee2?w=1920&h=1080&fit=crop', // Saigon
+      'https://images.unsplash.com/photo-1509825829770-e869beec3736?w=1920&h=1080&fit=crop', // Tam Coc
+      'https://images.unsplash.com/photo-1540611025311-01df3cef54b5?w=1920&h=1080&fit=crop', // Vietnamese landscape
+      'https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=1920&h=1080&fit=crop', // Mekong Delta
+    ]
+
+    let currentIndex = 0
+
+    const updateBackground = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY
+
+        if (apiKey) {
+          // Use official Unsplash API with access key
+          const response = await fetch(
+            `https://api.unsplash.com/photos/random?query=vietnam&orientation=landscape&client_id=${apiKey}`
+          )
+          const data = await response.json()
+          if (data.urls && data.urls.regular) {
+            setBackgroundImage(data.urls.regular)
+            return
+          }
+        }
+
+        // Fallback: Cycle through curated Vietnam photos
+        setBackgroundImage(vietnamPhotos[currentIndex])
+        currentIndex = (currentIndex + 1) % vietnamPhotos.length
+      } catch (error) {
+        console.error('Error fetching background:', error)
+        // Use curated photos as fallback
+        setBackgroundImage(vietnamPhotos[currentIndex])
+        currentIndex = (currentIndex + 1) % vietnamPhotos.length
+      }
     }
 
     // Set initial background
@@ -251,9 +285,16 @@ function App() {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 bg-cover bg-center bg-fixed transition-all duration-1000"
+      className={`min-h-screen bg-cover bg-center bg-fixed transition-all duration-1000 ${
+        !backgroundImage ? 'bg-gradient-to-br from-blue-50 to-indigo-100' : ''
+      }`}
       style={{
-        backgroundImage: backgroundImage ? `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${backgroundImage})` : undefined
+        backgroundImage: backgroundImage
+          ? `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${backgroundImage})`
+          : undefined,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
       }}
     >
       {/* Header */}
