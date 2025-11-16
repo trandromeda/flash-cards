@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { Volume2, ArrowRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import flashcardsData from './data/flashcards.json'
 
 function App() {
@@ -8,9 +10,52 @@ function App() {
   const [view, setView] = useState('study') // 'study' or 'browse'
   const [selectedTags, setSelectedTags] = useState([])
   const [audioCache, setAudioCache] = useState({}) // Cache for audio URLs
+  const [viewedCards, setViewedCards] = useState(() => {
+    // Initialize from localStorage or empty array
+    const saved = localStorage.getItem('viewedCards')
+    return saved ? JSON.parse(saved) : []
+  })
+  const [backgroundImage, setBackgroundImage] = useState('')
 
   // Get all unique tags
   const allTags = [...new Set(flashcards.flatMap(card => card.tags))].sort()
+
+  // Emoji mapping for categories
+  const tagEmojis = {
+    'basics': '📚',
+    'greetings': '👋',
+    'family': '👨‍👩‍👧‍👦',
+    'food': '🍜',
+    'work': '💼',
+    'questions': '❓',
+    'shopping': '🛒',
+    'restaurant': '🍽️',
+    'cooking': '👨‍🍳',
+    'hobbies': '🎨',
+    'health': '🏥',
+    'travel': '✈️',
+    'directions': '🗺️',
+    'time': '⏰',
+    'weather': '🌤️',
+    'numbers': '🔢',
+    'colors': '🎨',
+    'animals': '🐾',
+    'body': '🧍',
+    'clothing': '👔',
+    'emotions': '😊',
+    'home': '🏠',
+    'transportation': '🚗',
+    'education': '🎓',
+    'sports': '⚽',
+    'nature': '🌳',
+    'technology': '💻',
+    'default': '🏷️'
+  }
+
+  const getTagEmoji = (tag) => {
+    const lowerTag = tag.toLowerCase()
+    return tagEmojis[lowerTag] || tagEmojis['default']
+  }
 
   // Filter cards based on selected tags
   const filteredCards = selectedTags.length > 0
@@ -28,14 +73,84 @@ function App() {
 
   // Initialize with a random card
   useEffect(() => {
-    setCurrentCard(getRandomCard())
+    const card = getRandomCard()
+    setCurrentCard(card)
+    // Add initial card to viewed cards
+    if (card && !viewedCards.find(c => c.id === card.id)) {
+      const updatedViewed = [...viewedCards, card]
+      setViewedCards(updatedViewed)
+      localStorage.setItem('viewedCards', JSON.stringify(updatedViewed))
+    }
   }, [filteredCards])
+
+  // Save viewed cards to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('viewedCards', JSON.stringify(viewedCards))
+  }, [viewedCards])
+
+  // Fetch and update background image from Unsplash every minute
+  useEffect(() => {
+    const updateBackground = () => {
+      // Add timestamp to prevent caching and get a new image each time
+      const timestamp = new Date().getTime()
+      const imageUrl = `https://source.unsplash.com/1920x1080/?vietnam,hanoi,saigon,landscape&${timestamp}`
+      setBackgroundImage(imageUrl)
+    }
+
+    // Set initial background
+    updateBackground()
+
+    // Update background every minute (60000ms)
+    const interval = setInterval(updateBackground, 60000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      // Only enable shortcuts in study mode
+      if (view !== 'study' || !currentCard) return
+
+      // Prevent shortcuts if user is typing in an input/textarea
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
+
+      switch(e.key) {
+        case '1':
+          e.preventDefault()
+          playAudio(currentCard.vietnamese)
+          break
+        case '2':
+          e.preventDefault()
+          if (currentCard.example) {
+            playAudio(currentCard.example)
+          }
+          break
+        case ' ':
+          e.preventDefault()
+          setIsFlipped(!isFlipped)
+          break
+        case 'Enter':
+          e.preventDefault()
+          nextCard()
+          break
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => window.removeEventListener('keydown', handleKeyPress)
+  }, [view, currentCard, isFlipped])
 
   // Next random card
   const nextCard = () => {
     setIsFlipped(false)
     setTimeout(() => {
-      setCurrentCard(getRandomCard())
+      const card = getRandomCard()
+      setCurrentCard(card)
+      // Add to viewed cards
+      if (card && !viewedCards.find(c => c.id === card.id)) {
+        setViewedCards(prev => [...prev, card])
+      }
     }, 200)
   }
 
@@ -135,33 +250,30 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 bg-cover bg-center bg-fixed transition-all duration-1000"
+      style={{
+        backgroundImage: backgroundImage ? `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${backgroundImage})` : undefined
+      }}
+    >
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-gray-900">Vietnamese Flash Cards</h1>
             <div className="flex gap-2">
-              <button
+              <Button
                 onClick={() => setView('study')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  view === 'study'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
+                variant={view === 'study' ? 'default' : 'outline'}
               >
                 Study
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => setView('browse')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  view === 'browse'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
+                variant={view === 'browse' ? 'default' : 'outline'}
               >
                 Browse All
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -173,12 +285,13 @@ function App() {
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-gray-700">Filter by category:</h3>
             {selectedTags.length > 0 && (
-              <button
+              <Button
                 onClick={clearFilters}
-                className="text-sm text-indigo-600 hover:text-indigo-800"
+                variant="ghost"
+                size="sm"
               >
                 Clear filters
-              </button>
+              </Button>
             )}
           </div>
           <div className="flex flex-wrap gap-2">
@@ -192,6 +305,7 @@ function App() {
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
+                <span className="mr-1">{getTagEmoji(tag)}</span>
                 {tag}
               </button>
             ))}
@@ -207,50 +321,110 @@ function App() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {view === 'study' ? (
-          // Study View - Single Card
-          <div className="flex flex-col items-center">
+          // Study View - Single Card with Stack
+          <div className="flex gap-6">
+            {/* Card Stack - Left Side */}
+            {viewedCards.length > 0 && (
+              <div className="w-64 shrink-0">
+                <h3 className="text-sm font-semibold text-gray-700 mb-3">
+                  Session Progress ({viewedCards.length})
+                </h3>
+                <div className={`space-y-2 ${viewedCards.length > 10 ? 'max-h-[600px] overflow-y-auto pr-2' : ''}`}>
+                  {viewedCards.map((card, index) => (
+                    <div
+                      key={`${card.id}-${index}`}
+                      className="group relative bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all duration-200 cursor-pointer"
+                    >
+                      {/* Collapsed state */}
+                      <div className="group-hover:hidden">
+                        <p className="text-xs text-gray-500 mb-1">Card {index + 1}</p>
+                        <p className="text-sm font-semibold text-gray-900 truncate">
+                          {card.vietnamese}
+                        </p>
+                      </div>
+                      {/* Expanded state on hover */}
+                      <div className="hidden group-hover:block">
+                        <p className="text-xs text-gray-500 mb-1">Vietnamese</p>
+                        <p className="text-sm font-semibold text-gray-900 mb-2">
+                          {card.vietnamese}
+                        </p>
+                        <p className="text-xs text-gray-500 mb-1">English</p>
+                        <p className="text-sm text-gray-700">
+                          {card.english}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Main Card Area */}
+            <div className="flex-1 flex flex-col items-center">
             {currentCard ? (
               <>
-                <div
-                  className={`w-full max-w-md bg-white rounded-2xl shadow-xl p-8 cursor-pointer transition-all duration-300 hover:shadow-2xl ${
-                    isFlipped ? 'bg-indigo-50' : ''
-                  }`}
-                  onClick={() => setIsFlipped(!isFlipped)}
-                  style={{ minHeight: '300px' }}
-                >
-                  <div className="flex flex-col items-center justify-center h-full">
-                    <div className="text-center mb-6">
-                      <p className="text-sm text-gray-500 mb-2">
-                        {isFlipped ? 'English' : 'Vietnamese'}
-                      </p>
-                      <h2 className="text-4xl font-bold text-gray-900">
-                        {isFlipped ? currentCard.english : currentCard.vietnamese}
-                      </h2>
+                <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
+                  {/* Main card content */}
+                  <div className="p-8">
+                    {/* Vietnamese and English side by side */}
+                    <div className="grid grid-cols-2 gap-8 mb-6">
+                      {/* Vietnamese side */}
+                      <div className="border-r border-gray-200 pr-8">
+                        <p className="text-sm text-gray-500 mb-2">Vietnamese</p>
+                        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                          {currentCard.vietnamese}
+                        </h2>
+                        <Button
+                          onClick={() => playAudio(currentCard.vietnamese)}
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2"
+                        >
+                          <Volume2 className="w-4 h-4" />
+                          Play Word
+                        </Button>
+                      </div>
+
+                      {/* English side - revealed on click */}
+                      <div
+                        className="pl-8 cursor-pointer"
+                        onClick={() => setIsFlipped(!isFlipped)}
+                      >
+                        <p className="text-sm text-gray-500 mb-2">English</p>
+                        <h2 className={`text-4xl font-bold transition-all duration-300 ${
+                          isFlipped ? 'text-gray-900' : 'text-transparent bg-gray-200 rounded select-none'
+                        }`}>
+                          {isFlipped ? currentCard.english : '••••••'}
+                        </h2>
+                        {!isFlipped && (
+                          <p className="text-sm text-gray-500 mt-2 italic">Click to reveal</p>
+                        )}
+                      </div>
                     </div>
 
-                    {!isFlipped && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          playAudio(currentCard.vietnamese)
-                        }}
-                        className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-                      >
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M10 3a1 1 0 011 1v12a1 1 0 01-1.707.707l-4-4H3a1 1 0 01-1-1V8a1 1 0 011-1h2.293l4-4A1 1 0 0110 3zm8.536 4.464a1 1 0 010 1.414 5 5 0 010 7.071 1 1 0 11-1.414-1.414 3 3 0 000-4.243 1 1 0 010-1.414z"/>
-                        </svg>
-                        Play Audio
-                      </button>
-                    )}
-
+                    {/* Example sentence */}
                     {currentCard.example && (
                       <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
-                        <p className="text-sm text-gray-700 italic">{currentCard.example}</p>
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
+                            <p className="text-sm text-gray-700 italic">{currentCard.example}</p>
+                          </div>
+                          <Button
+                            onClick={() => playAudio(currentCard.example)}
+                            variant="ghost"
+                            size="sm"
+                            className="flex items-center gap-1 shrink-0"
+                          >
+                            <Volume2 className="w-4 h-4" />
+                            Play
+                          </Button>
+                        </div>
                       </div>
                     )}
 
-                    <div className="mt-6 flex flex-wrap gap-1 justify-center">
+                    {/* Tags */}
+                    <div className="mt-6 flex flex-wrap gap-1">
                       {currentCard.tags.map(tag => (
                         <span
                           key={tag}
@@ -261,30 +435,54 @@ function App() {
                       ))}
                     </div>
                   </div>
+
+                  {/* Next card button - bottom right */}
+                  <div className="absolute bottom-4 right-4">
+                    <Button
+                      onClick={nextCard}
+                      className="flex items-center gap-2"
+                    >
+                      Next Card
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
 
-                <p className="mt-4 text-sm text-gray-600">
-                  Click card to {isFlipped ? 'hide' : 'reveal'} translation
-                </p>
-
-                <button
-                  onClick={nextCard}
-                  className="mt-6 px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
-                >
-                  Next Card
-                </button>
+                {/* Keyboard shortcuts legend */}
+                <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="text-xs font-semibold text-gray-600 mb-2">Keyboard Shortcuts:</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                    <div className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-white border border-gray-300 rounded text-xs font-mono">1</kbd>
+                      <span className="text-gray-600">Play word</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-white border border-gray-300 rounded text-xs font-mono">2</kbd>
+                      <span className="text-gray-600">Play example</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-white border border-gray-300 rounded text-xs font-mono">Space</kbd>
+                      <span className="text-gray-600">Reveal translation</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 bg-white border border-gray-300 rounded text-xs font-mono">Enter</kbd>
+                      <span className="text-gray-600">Next card</span>
+                    </div>
+                  </div>
+                </div>
               </>
             ) : (
               <div className="text-center">
                 <p className="text-gray-600">No cards available with the selected filters.</p>
-                <button
+                <Button
                   onClick={clearFilters}
-                  className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                  className="mt-4"
                 >
                   Clear Filters
-                </button>
+                </Button>
               </div>
             )}
+            </div>
           </div>
         ) : (
           // Browse View - All Cards
@@ -299,15 +497,15 @@ function App() {
                   <h3 className="text-2xl font-bold text-gray-900 mb-3">
                     {card.vietnamese}
                   </h3>
-                  <button
+                  <Button
                     onClick={() => playAudio(card.vietnamese)}
-                    className="flex items-center gap-1 text-indigo-600 hover:text-indigo-800 text-sm"
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-1 p-0 h-auto"
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10 3a1 1 0 011 1v12a1 1 0 01-1.707.707l-4-4H3a1 1 0 01-1-1V8a1 1 0 011-1h2.293l4-4A1 1 0 0110 3zm8.536 4.464a1 1 0 010 1.414 5 5 0 010 7.071 1 1 0 11-1.414-1.414 3 3 0 000-4.243 1 1 0 010-1.414z"/>
-                    </svg>
+                    <Volume2 className="w-4 h-4" />
                     Play
-                  </button>
+                  </Button>
                 </div>
 
                 <div className="mb-4">
@@ -317,8 +515,20 @@ function App() {
 
                 {card.example && (
                   <div className="mb-4 p-3 bg-blue-50 rounded border border-blue-200">
-                    <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
-                    <p className="text-sm text-gray-700 italic">{card.example}</p>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
+                        <p className="text-sm text-gray-700 italic">{card.example}</p>
+                      </div>
+                      <Button
+                        onClick={() => playAudio(card.example)}
+                        variant="ghost"
+                        size="sm"
+                        className="shrink-0 h-auto p-1"
+                      >
+                        <Volume2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
                 )}
 
