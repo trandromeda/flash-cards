@@ -44,8 +44,8 @@ export const getTagEmoji = (tag) => {
     return TAG_EMOJIS[lowerTag] || TAG_EMOJIS["default"];
 };
 
-// Background update interval (2 minutes)
-export const BACKGROUND_UPDATE_INTERVAL = 120000;
+// Background update interval (5 minutes)
+export const BACKGROUND_UPDATE_INTERVAL = 300000;
 
 // TTS configuration
 export const TTS_CONFIG = {

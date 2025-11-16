@@ -3,12 +3,13 @@ import { BACKGROUND_UPDATE_INTERVAL } from '@/utils/constants'
 
 /**
  * Custom hook for managing dynamic background images from Unsplash
- * @returns {Object} Background image URL, animation key, and fallback status
+ * @returns {Object} Background image URL, animation key, fallback status, and attribution data
  */
 export const useBackground = () => {
   const [backgroundImage, setBackgroundImage] = useState('')
   const [backgroundKey, setBackgroundKey] = useState(0)
   const [useFallback, setUseFallback] = useState(false)
+  const [attribution, setAttribution] = useState(null)
 
   useEffect(() => {
     const updateBackground = async () => {
@@ -21,6 +22,7 @@ export const useBackground = () => {
         const apiUrl = new URL('https://api.unsplash.com/photos/random')
         apiUrl.searchParams.append('query', 'vietnam')
         apiUrl.searchParams.append('orientation', 'landscape')
+        apiUrl.searchParams.append('collections', '9688283,3862335,Om4u_Io6Qn0')
 
         if (accessKey) {
           apiUrl.searchParams.append('client_id', accessKey)
@@ -34,8 +36,15 @@ export const useBackground = () => {
 
         const data = await response.json()
 
-        if (data.urls && data.urls.regular) {
+        if (data.urls && data.urls.full) {
           const newImageUrl = data.urls.regular
+
+          // Extract attribution data
+          const attributionData = {
+            photographerName: data.user?.name || 'Unknown',
+            photographerUrl: data.user?.links?.html || 'https://unsplash.com',
+            photoUrl: data.links?.html || 'https://unsplash.com'
+          }
 
           // Preload the image
           const img = new Image()
@@ -43,6 +52,7 @@ export const useBackground = () => {
           img.onload = () => {
             // Update background image and key for AnimatePresence
             setBackgroundImage(newImageUrl)
+            setAttribution(attributionData)
             setBackgroundKey(prev => prev + 1)
             setUseFallback(false)
           }
@@ -64,5 +74,5 @@ export const useBackground = () => {
     return () => clearInterval(interval)
   }, [])
 
-  return { backgroundImage, backgroundKey, useFallback }
+  return { backgroundImage, backgroundKey, useFallback, attribution }
 }

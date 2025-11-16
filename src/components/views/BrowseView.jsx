@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { CategoryFilter } from '@/components/CategoryFilter'
 import { useFlashcardContext } from '@/context/FlashcardContext'
 import { useAudioContext } from '@/context/AudioContext'
 import { getTagEmoji } from '@/utils/constants'
@@ -41,6 +42,12 @@ export const BrowseView = () => {
 
   return (
     <>
+      {/* Category filter */}
+      <div className="w-full mb-6">
+        <CategoryFilter />
+      </div>
+
+      {/* Table */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
         <Table>
           <TableHeader>
