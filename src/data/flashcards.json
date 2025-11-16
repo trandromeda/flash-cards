@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "vietnamese": "Xin chào",
+    "english": "Hello",
+    "tags": ["greetings", "basics"]
+  },
+  {
+    "id": 2,
+    "vietnamese": "Cảm ơn",
+    "english": "Thank you",
+    "tags": ["greetings", "basics"]
+  },
+  {
+    "id": 3,
+    "vietnamese": "Tạm biệt",
+    "english": "Goodbye",
+    "tags": ["greetings", "basics"]
+  },
+  {
+    "id": 4,
+    "vietnamese": "Gia đình",
+    "english": "Family",
+    "tags": ["family"]
+  },
+  {
+    "id": 5,
+    "vietnamese": "Mẹ",
+    "english": "Mother",
+    "tags": ["family"]
+  },
+  {
+    "id": 6,
+    "vietnamese": "Cha",
+    "english": "Father",
+    "tags": ["family"]
+  },
+  {
+    "id": 7,
+    "vietnamese": "Cơm",
+    "english": "Rice",
+    "tags": ["food"]
+  },
+  {
+    "id": 8,
+    "vietnamese": "Nước",
+    "english": "Water",
+    "tags": ["food"]
+  },
+  {
+    "id": 9,
+    "vietnamese": "Công việc",
+    "english": "Work",
+    "tags": ["work"]
+  },
+  {
+    "id": 10,
+    "vietnamese": "Văn phòng",
+    "english": "Office",
+    "tags": ["work"]
+  }
+]
