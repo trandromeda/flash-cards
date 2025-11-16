@@ -5,8 +5,8 @@ import { Kbd } from "@/components/ui/kbd"
  */
 export const KeyboardShortcutsLegend = () => {
   return (
-    <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-      <h3 className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-2">Keyboard Shortcuts:</h3>
+    <div className="mt-6 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+      <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">Keyboard Shortcuts</h3>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 text-sm">
         <div className="flex items-center gap-2">
           <Kbd>1</Kbd>

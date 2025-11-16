@@ -23,9 +23,9 @@ export const CategoryFilter = () => {
   }))
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+    <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">Filter by tags</h3>
+        <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300">Filter by tags</h3>
         {selectedTags.length > 0 && (
           <Button
             onClick={clearFilters}

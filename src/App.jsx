@@ -1,5 +1,6 @@
 import { FlashcardProvider, useFlashcardContext } from '@/context/FlashcardContext'
 import { AudioProvider } from '@/context/AudioContext'
+import { TipsProvider } from '@/context/TipsContext'
 import { ThemeProvider } from '@/components/theme-provider'
 import { BackgroundImage } from '@/components/BackgroundImage'
 import { Header } from '@/components/Header'
@@ -67,7 +68,9 @@ function App() {
     <ThemeProvider defaultTheme="system" storageKey="vietnamese-flash-cards-theme">
       <AudioProvider>
         <FlashcardProvider>
-          <AppContent />
+          <TipsProvider>
+            <AppContent />
+          </TipsProvider>
         </FlashcardProvider>
       </AudioProvider>
     </ThemeProvider>

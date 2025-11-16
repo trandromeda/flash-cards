@@ -1,10 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { useFlashcardContext } from '@/context/FlashcardContext'
 import { useAudioContext } from '@/context/AudioContext'
+import { useTips } from '@/context/TipsContext'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 import { FlashCard } from '@/components/FlashCard'
 import { CategoryFilter } from '@/components/CategoryFilter'
 import { KeyboardShortcutsLegend } from '@/components/KeyboardShortcutsLegend'
+import { TipCard } from '@/components/TipCard'
 
 /**
  * Study view component - Category filter above card
@@ -19,6 +21,13 @@ export const StudyView = () => {
   } = useFlashcardContext()
 
   const { playAudio } = useAudioContext()
+  const { currentTip, setCurrentTip, getNextTip } = useTips()
+
+  // Handle clicking on tip to show next one (manual advancement)
+  const handleTipClick = () => {
+    const newTip = getNextTip()
+    setCurrentTip(newTip)
+  }
 
   // Keyboard shortcuts for study mode
   useKeyboardShortcuts({
@@ -47,6 +56,13 @@ export const StudyView = () => {
             onNext={nextCard}
             showNextButton={true}
           />
+
+          {/* Language tip */}
+          {currentTip && (
+            <div className="w-full mt-6">
+              <TipCard tip={currentTip} onNextTip={handleTipClick} />
+            </div>
+          )}
 
           {/* Keyboard shortcuts legend */}
           <KeyboardShortcutsLegend />

@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Expressing Feelings with 'cảm thấy'",
+    "content": "When describing how you feel, always use **'cảm thấy'** (to feel) before the emotion or sensation.\n\nExample: 'cảm thấy sốt' means 'to feel feverish'.\n\n**Note:** 'bị' is typically omitted with 'cảm thấy', even though 'bị' is used for negative passive experiences in other contexts.",
+    "category": "grammar",
+    "tags": ["grammar", "expressions", "feelings"]
+  },
+  {
+    "title": "Two Meanings of 'không được'",
+    "content": "**'không được'** and **'không ... được'** have different meanings:\n\n- **'không được'** = 'not allowed' or 'must not'\n- **'không ... được'** = 'cannot' or 'unable to'\n\nExample: 'không đi làm được' means 'cannot go to work' (physically unable), not 'not allowed to go to work'.",
+    "category": "grammar",
+    "tags": ["grammar", "negation", "common-mistakes"]
+  },
+  {
+    "title": "Using 'xem' vs 'gặp'",
+    "content": "**'xem'** (to see/watch) is only used for things, not people. When you want to 'see' a person, use **'gặp'** instead.\n\nExample: 'đi gặp bác sĩ' (go see the doctor)\n\nYou can shorten this to 'đi bác sĩ' in casual conversation.",
+    "category": "vocabulary",
+    "tags": ["vocabulary", "verbs", "common-mistakes"]
+  },
+  {
+    "title": "Sleep vs Rest: 'đi ngủ' and 'đi nghỉ'",
+    "content": "**'đi ngủ'** means 'to go to sleep' and can be used any time (not just at night).\n\n**'đi nghỉ'** has multiple meanings:\n- 'to rest'\n- 'to take a break'\n- 'to go on vacation'\n\nFor a quick nap during the day, you can say 'đi ngủ một chút' (go sleep a little bit).",
+    "category": "vocabulary",
+    "tags": ["vocabulary", "daily-life", "verbs"]
+  },
+  {
+    "title": "Making Reservations with 'đặt'",
+    "content": "Use **'đặt'** when booking or reserving something. Common phrases:\n\n- 'đặt bàn' (reserve a table)\n- 'đặt lịch' (book an appointment)\n- 'đặt phòng' (book a room)\n\nThis verb is essential for making arrangements.",
+    "category": "vocabulary",
+    "tags": ["vocabulary", "daily-life", "travel"]
+  },
+  {
+    "title": "Transition Words: 'Sau đó' vs 'Sau khi'",
+    "content": "**'Sau đó'** stands alone and means 'afterwards' or 'then'.\n\n**'Sau khi'** requires a following clause and means 'after [something happens]'.\n\nExample: 'Sau khi có thuốc' means 'after getting the medicine'.\n\nUse 'sau khi' to connect two actions.",
+    "category": "grammar",
+    "tags": ["grammar", "transitions", "sentence-structure"]
+  },
+  {
+    "title": "Going, Coming, Being: 'đến', 'đi', 'ở'",
+    "content": "Three key location verbs:\n\n- **'đến'** = 'to arrive at' or 'to come to'\n  - Example: 'Em đến Canada chơi' (come to Canada to visit)\n- **'đi'** = 'to go'\n  - Example: 'Em sẽ đi Canada' (will go to Canada)\n- **'ở'** = 'to be at' or 'to stay at'\n  - Example: 'Hôm nay anh ở nhà' (today I'm staying home)\n\nBoth 'đến' and 'đi' can be used regardless of distance.\n\nExample: 'đi dạo ở công viên' (go for a walk in the park).",
+    "category": "grammar",
+    "tags": ["grammar", "verbs", "movement", "location"]
+  },
+  {
+    "title": "Intensifiers: 'lắm' vs 'hơn'",
+    "content": "**'Adjective + lắm'** means 'very much' or 'very [adjective]'.\n\n**'hơn'** means 'better' or 'more', used for comparisons.\n\nExamples:\n- 'khỏe hơn' (feeling better)\n- 'phở ở đây ngon hơn' (this pho is better - implied comparison to another place)",
+    "category": "grammar",
+    "tags": ["grammar", "comparisons", "adjectives"]
+  }
+]

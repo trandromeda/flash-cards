@@ -26,7 +26,7 @@ export const FlashCard = ({
 
   return (
     <div className="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative border border-gray-200 dark:border-gray-700">
-      <div className="p-4 sm:p-6 md:p-8">
+      <div className="p-6">
         {/* Vietnamese and English side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-6">
           {/* Vietnamese side */}
@@ -98,28 +98,28 @@ export const FlashCard = ({
           </div>
         )}
 
-        {/* Tags */}
-        <div className="mt-6 flex flex-wrap gap-2">
-          {card.tags.map(tag => (
-            <Badge key={tag} variant="secondary">
-              {getTagEmoji(tag)} {tag}
-            </Badge>
-          ))}
+        {/* Tags and Next button */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+          <div className="flex flex-wrap gap-2">
+            {card.tags.map(tag => (
+              <Badge key={tag} variant="secondary">
+                {getTagEmoji(tag)} {tag}
+              </Badge>
+            ))}
+          </div>
+
+          {/* Next card button - shown in study mode */}
+          {showNextButton && onNext && (
+            <Button
+              onClick={onNext}
+              className="flex items-center gap-2 sm:ml-auto shrink-0"
+            >
+              Next Card
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          )}
         </div>
       </div>
-
-      {/* Next card button - shown in study mode */}
-      {showNextButton && onNext && (
-        <div className="mt-4 md:mt-0 md:absolute md:bottom-4 md:right-4">
-          <Button
-            onClick={onNext}
-            className="flex items-center gap-2 w-full md:w-auto"
-          >
-            Next Card
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </div>
-      )}
     </div>
   )
 }

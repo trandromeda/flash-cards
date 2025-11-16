@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { ModeToggle } from '@/components/mode-toggle'
 import { NewCardDialog } from '@/components/NewCardDialog'
+import { NewTipDialog } from '@/components/NewTipDialog'
 import { useFlashcardContext } from '@/context/FlashcardContext'
 
 /**
@@ -32,6 +33,7 @@ export const Header = () => {
               Browse All
             </Button>
             <NewCardDialog />
+            <NewTipDialog />
             <ModeToggle />
           </div>
         </div>
