@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Volume2, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import flashcardsData from './data/flashcards.json'
@@ -16,8 +17,7 @@ function App() {
     return saved ? JSON.parse(saved) : []
   })
   const [backgroundImage, setBackgroundImage] = useState('')
-  const [nextBackgroundImage, setNextBackgroundImage] = useState('')
-  const [isFading, setIsFading] = useState(false)
+  const [backgroundKey, setBackgroundKey] = useState(0)
 
   // Get all unique tags
   const allTags = [...new Set(flashcards.flatMap(card => card.tags))].sort()
@@ -122,16 +122,9 @@ function App() {
           const img = new Image()
           img.src = newImageUrl
           img.onload = () => {
-            // Start fade transition
-            setNextBackgroundImage(newImageUrl)
-            setIsFading(true)
-
-            // After fade completes, swap images
-            setTimeout(() => {
-              setBackgroundImage(newImageUrl)
-              setNextBackgroundImage('')
-              setIsFading(false)
-            }, 1000) // Match CSS transition duration
+            // Update background image and key for AnimatePresence
+            setBackgroundImage(newImageUrl)
+            setBackgroundKey(prev => prev + 1)
           }
         }
       } catch (error) {
@@ -297,37 +290,34 @@ function App() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Background layer 1 - current image */}
-      <div
-        className={`fixed inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-          !backgroundImage ? 'bg-gradient-to-br from-blue-50 to-indigo-100' : ''
-        }`}
-        style={{
-          backgroundImage: backgroundImage
-            ? `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15)), url(${backgroundImage})`
-            : undefined,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          zIndex: -2
-        }}
-      />
-
-      {/* Background layer 2 - next image for fade transition */}
-      {nextBackgroundImage && (
-        <div
-          className={`fixed inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-            isFading ? 'opacity-100' : 'opacity-0'
-          }`}
-          style={{
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15)), url(${nextBackgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-            zIndex: -1
-          }}
-        />
-      )}
+      {/* Background with AnimatePresence for smooth cross-fade */}
+      <div className="fixed inset-0" style={{ zIndex: -1 }}>
+        <AnimatePresence mode="wait">
+          {backgroundImage ? (
+            <motion.div
+              key={backgroundKey}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15)), url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundAttachment: 'fixed'
+              }}
+            />
+          ) : (
+            <motion.div
+              key="gradient"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100"
+            />
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Main content */}
       <div className="relative min-h-screen">
@@ -407,25 +397,23 @@ function App() {
                   {viewedCards.map((card, index) => (
                     <div
                       key={`${card.id}-${index}`}
-                      className="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden"
+                      className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer p-3"
                     >
-                      {/* Collapsed state */}
-                      <div className="p-3 group-hover:opacity-0 group-hover:max-h-0 transition-all duration-300">
+                      <div className="group">
+                        {/* Always visible: Card number and Vietnamese */}
                         <p className="text-xs text-gray-500 mb-1">Card {index + 1}</p>
-                        <p className="text-sm font-semibold text-gray-900 truncate">
+                        <p className="text-sm font-semibold text-gray-900 mb-1">
                           {card.vietnamese}
                         </p>
-                      </div>
-                      {/* Expanded state on hover */}
-                      <div className="absolute inset-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <p className="text-xs text-gray-500 mb-1">Vietnamese</p>
-                        <p className="text-sm font-semibold text-gray-900 mb-2">
-                          {card.vietnamese}
-                        </p>
-                        <p className="text-xs text-gray-500 mb-1">English</p>
-                        <p className="text-sm text-gray-700">
-                          {card.english}
-                        </p>
+                        {/* Hidden until hover: English translation */}
+                        <div className="max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-200 ease-in-out">
+                          <div className="pt-2 mt-2 border-t border-gray-200">
+                            <p className="text-xs text-gray-500 mb-1">English</p>
+                            <p className="text-sm text-gray-700">
+                              {card.english}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
