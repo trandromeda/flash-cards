@@ -205,6 +205,49 @@ export const FlashcardProvider = ({ children }) => {
     }
   }, [currentCard, getRandomCard, setViewedCards])
 
+  // Create new flashcard
+  const createFlashcard = useCallback(async (cardData) => {
+    try {
+      // Transform app format to database format
+      const dbCard = {
+        vietnamese: cardData.vietnamese,
+        english: cardData.english,
+        example: cardData.example || null,
+        example_translation: cardData.exampleTranslation || null,
+        tags: cardData.tags || [],
+        notes: cardData.notes || null
+      }
+
+      const { data, error: insertError } = await supabase
+        .from('flashcards')
+        .insert(dbCard)
+        .select()
+
+      if (insertError) throw insertError
+
+      // Transform database format back to app format
+      const newCard = {
+        id: data[0].id,
+        vietnamese: data[0].vietnamese,
+        english: data[0].english,
+        example: data[0].example,
+        exampleTranslation: data[0].example_translation,
+        tags: data[0].tags || [],
+        synonymId: data[0].synonym_id,
+        lastSeen: data[0].last_seen,
+        notes: data[0].notes
+      }
+
+      // Add to local state
+      setFlashcards(prev => [...prev, newCard])
+
+      return { success: true, card: newCard }
+    } catch (err) {
+      console.error('Error creating flashcard:', err)
+      return { success: false, error: err.message }
+    }
+  }, [])
+
   const value = {
     flashcards,
     loading,
@@ -224,7 +267,8 @@ export const FlashcardProvider = ({ children }) => {
     clearFilters,
     updateLastSeen,
     updateFlashcard,
-    deleteFlashcard
+    deleteFlashcard,
+    createFlashcard
   }
 
   return (
