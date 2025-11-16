@@ -16,6 +16,8 @@ function App() {
     return saved ? JSON.parse(saved) : []
   })
   const [backgroundImage, setBackgroundImage] = useState('')
+  const [nextBackgroundImage, setNextBackgroundImage] = useState('')
+  const [isFading, setIsFading] = useState(false)
 
   // Get all unique tags
   const allTags = [...new Set(flashcards.flatMap(card => card.tags))].sort()
@@ -114,7 +116,23 @@ function App() {
         const data = await response.json()
 
         if (data.urls && data.urls.regular) {
-          setBackgroundImage(data.urls.regular)
+          const newImageUrl = data.urls.regular
+
+          // Preload the image
+          const img = new Image()
+          img.src = newImageUrl
+          img.onload = () => {
+            // Start fade transition
+            setNextBackgroundImage(newImageUrl)
+            setIsFading(true)
+
+            // After fade completes, swap images
+            setTimeout(() => {
+              setBackgroundImage(newImageUrl)
+              setNextBackgroundImage('')
+              setIsFading(false)
+            }, 1000) // Match CSS transition duration
+          }
         }
       } catch (error) {
         console.error('Error fetching background from Unsplash:', error)
@@ -128,8 +146,8 @@ function App() {
     // Set initial background
     updateBackground()
 
-    // Update background every minute (60000ms)
-    const interval = setInterval(updateBackground, 60000)
+    // Update background every two minutes
+    const interval = setInterval(updateBackground, 120000)
 
     return () => clearInterval(interval)
   }, [])
@@ -278,34 +296,58 @@ function App() {
   }
 
   return (
-    <div
-      className={`min-h-screen bg-cover bg-center bg-fixed transition-all duration-1000 ${
-        !backgroundImage ? 'bg-gradient-to-br from-blue-50 to-indigo-100' : ''
-      }`}
-      style={{
-        backgroundImage: backgroundImage
-          ? `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${backgroundImage})`
-          : undefined,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
-    >
+    <div className="min-h-screen relative">
+      {/* Background layer 1 - current image */}
+      <div
+        className={`fixed inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          !backgroundImage ? 'bg-gradient-to-br from-blue-50 to-indigo-100' : ''
+        }`}
+        style={{
+          backgroundImage: backgroundImage
+            ? `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15)), url(${backgroundImage})`
+            : undefined,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          zIndex: -2
+        }}
+      />
+
+      {/* Background layer 2 - next image for fade transition */}
+      {nextBackgroundImage && (
+        <div
+          className={`fixed inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+            isFading ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.15)), url(${nextBackgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            zIndex: -1
+          }}
+        />
+      )}
+
+      {/* Main content */}
+      <div className="relative min-h-screen">
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Vietnamese Flash Cards</h1>
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Vietnamese Flash Cards</h1>
             <div className="flex gap-2">
               <Button
                 onClick={() => setView('study')}
                 variant={view === 'study' ? 'default' : 'outline'}
+                size="sm"
               >
                 Study
               </Button>
               <Button
                 onClick={() => setView('browse')}
                 variant={view === 'browse' ? 'default' : 'outline'}
+                size="sm"
               >
                 Browse All
               </Button>
@@ -357,28 +399,25 @@ function App() {
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {view === 'study' ? (
           // Study View - Single Card with Stack
-          <div className="flex gap-6">
-            {/* Card Stack - Left Side */}
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Card Stack - Left Side (hidden on mobile) */}
             {viewedCards.length > 0 && (
-              <div className="w-64 shrink-0">
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">
-                  Session Progress ({viewedCards.length})
-                </h3>
-                <div className={`space-y-2 ${viewedCards.length > 10 ? 'max-h-[600px] overflow-y-auto pr-2' : ''}`}>
+              <div className="hidden lg:block w-64 shrink-0">
+                <div className={`space-y-2 ${viewedCards.length > 5 ? 'max-h-[500px] overflow-y-auto pr-2' : ''}`}>
                   {viewedCards.map((card, index) => (
                     <div
                       key={`${card.id}-${index}`}
-                      className="group relative bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all duration-200 cursor-pointer"
+                      className="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden"
                     >
                       {/* Collapsed state */}
-                      <div className="group-hover:hidden">
+                      <div className="p-3 group-hover:opacity-0 group-hover:max-h-0 transition-all duration-300">
                         <p className="text-xs text-gray-500 mb-1">Card {index + 1}</p>
                         <p className="text-sm font-semibold text-gray-900 truncate">
                           {card.vietnamese}
                         </p>
                       </div>
                       {/* Expanded state on hover */}
-                      <div className="hidden group-hover:block">
+                      <div className="absolute inset-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <p className="text-xs text-gray-500 mb-1">Vietnamese</p>
                         <p className="text-sm font-semibold text-gray-900 mb-2">
                           {card.vietnamese}
@@ -400,13 +439,13 @@ function App() {
               <>
                 <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
                   {/* Main card content */}
-                  <div className="p-8">
+                  <div className="p-4 sm:p-6 md:p-8">
                     {/* Vietnamese and English side by side */}
-                    <div className="grid grid-cols-2 gap-8 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-6">
                       {/* Vietnamese side */}
-                      <div className="border-r border-gray-200 pr-8">
+                      <div className="md:border-r border-gray-200 md:pr-8 pb-4 md:pb-0 border-b md:border-b-0">
                         <p className="text-sm text-gray-500 mb-2">Vietnamese</p>
-                        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                           {currentCard.vietnamese}
                         </h2>
                         <Button
@@ -422,11 +461,11 @@ function App() {
 
                       {/* English side - revealed on click */}
                       <div
-                        className="pl-8 cursor-pointer"
+                        className="md:pl-8 pt-4 md:pt-0 cursor-pointer"
                         onClick={() => setIsFlipped(!isFlipped)}
                       >
                         <p className="text-sm text-gray-500 mb-2">English</p>
-                        <h2 className={`text-4xl font-bold transition-all duration-300 ${
+                        <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold transition-all duration-300 ${
                           isFlipped ? 'text-gray-900' : 'text-transparent bg-gray-200 rounded select-none'
                         }`}>
                           {isFlipped ? currentCard.english : '••••••'}
@@ -443,7 +482,13 @@ function App() {
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
                             <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
-                            <p className="text-sm text-gray-700 italic">{currentCard.example}</p>
+                            <p className="text-sm text-gray-700 italic mb-2">{currentCard.example}</p>
+                            {isFlipped && currentCard.exampleTranslation && (
+                              <div className="mt-2 pt-2 border-t border-blue-200">
+                                <p className="text-xs text-blue-600 font-semibold mb-1">Translation:</p>
+                                <p className="text-sm text-gray-600 italic">{currentCard.exampleTranslation}</p>
+                              </div>
+                            )}
                           </div>
                           <Button
                             onClick={() => playAudio(currentCard.example)}
@@ -471,11 +516,11 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Next card button - bottom right */}
-                  <div className="absolute bottom-4 right-4">
+                  {/* Next card button - bottom right on desktop, full width on mobile */}
+                  <div className="mt-4 md:mt-0 md:absolute md:bottom-4 md:right-4">
                     <Button
                       onClick={nextCard}
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-2 w-full md:w-auto"
                     >
                       Next Card
                       <ArrowRight className="w-4 h-4" />
@@ -486,7 +531,7 @@ function App() {
                 {/* Keyboard shortcuts legend */}
                 <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                   <h3 className="text-xs font-semibold text-gray-600 mb-2">Keyboard Shortcuts:</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 text-sm">
                     <div className="flex items-center gap-2">
                       <kbd className="px-2 py-1 bg-white border border-gray-300 rounded text-xs font-mono">1</kbd>
                       <span className="text-gray-600">Play word</span>
@@ -553,7 +598,13 @@ function App() {
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
                         <p className="text-xs text-blue-600 font-semibold mb-1">Example:</p>
-                        <p className="text-sm text-gray-700 italic">{card.example}</p>
+                        <p className="text-sm text-gray-700 italic mb-2">{card.example}</p>
+                        {card.exampleTranslation && (
+                          <div className="mt-2 pt-2 border-t border-blue-200">
+                            <p className="text-xs text-blue-600 font-semibold mb-1">Translation:</p>
+                            <p className="text-sm text-gray-600 italic">{card.exampleTranslation}</p>
+                          </div>
+                        )}
                       </div>
                       <Button
                         onClick={() => playAudio(card.example)}
@@ -581,6 +632,7 @@ function App() {
             ))}
           </div>
         )}
+      </div>
       </div>
     </div>
   )
