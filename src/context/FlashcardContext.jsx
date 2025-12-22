@@ -32,8 +32,8 @@ export const FlashcardProvider = ({ children }) => {
         // Transform database records to match app format
         const transformedData = data.map(card => ({
           id: card.id,
-          vietnamese: card.vietnamese,
-          english: card.english,
+          question: card.question,
+          answer: card.answer,
           example: card.example,
           exampleTranslation: card.example_translation,
           tags: card.tags || [],
@@ -98,8 +98,8 @@ export const FlashcardProvider = ({ children }) => {
       // Transform database format to app format
       return {
         id: selectedCard.id,
-        vietnamese: selectedCard.vietnamese,
-        english: selectedCard.english,
+        question: selectedCard.question,
+        answer: selectedCard.answer,
         example: selectedCard.example,
         exampleTranslation: selectedCard.example_translation,
         tags: selectedCard.tags || [],
@@ -188,8 +188,8 @@ export const FlashcardProvider = ({ children }) => {
     try {
       // Transform app format to database format
       const dbUpdates = {
-        vietnamese: updates.vietnamese,
-        english: updates.english,
+        question: updates.question,
+        answer: updates.answer,
         example: updates.example || null,
         example_translation: updates.exampleTranslation || null,
         tags: updates.tags || [],
@@ -258,8 +258,8 @@ export const FlashcardProvider = ({ children }) => {
     try {
       // Transform app format to database format
       const dbCard = {
-        vietnamese: cardData.vietnamese,
-        english: cardData.english,
+        question: cardData.question,
+        answer: cardData.answer,
         example: cardData.example || null,
         example_translation: cardData.exampleTranslation || null,
         tags: cardData.tags || [],
@@ -276,8 +276,8 @@ export const FlashcardProvider = ({ children }) => {
       // Transform database format back to app format
       const newCard = {
         id: data[0].id,
-        vietnamese: data[0].vietnamese,
-        english: data[0].english,
+        question: data[0].question,
+        answer: data[0].answer,
         example: data[0].example,
         exampleTranslation: data[0].example_translation,
         tags: data[0].tags || [],

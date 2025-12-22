@@ -45,8 +45,8 @@ export const BrowseView = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[30%]">Vietnamese</TableHead>
-              <TableHead className="w-[30%]">English</TableHead>
+              <TableHead className="w-[30%]">Question</TableHead>
+              <TableHead className="w-[30%]">Answer</TableHead>
               <TableHead className="hidden md:table-cell">Tags</TableHead>
             </TableRow>
           </TableHeader>
@@ -57,8 +57,8 @@ export const BrowseView = () => {
                 className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
                 onClick={() => handleRowClick(card)}
               >
-                <TableCell className="font-medium">{card.vietnamese}</TableCell>
-                <TableCell>{card.english}</TableCell>
+                <TableCell className="font-medium">{card.question}</TableCell>
+                <TableCell>{card.answer}</TableCell>
                 <TableCell className="hidden md:table-cell">
                   <div className="flex flex-wrap gap-1">
                     {card.tags.map(tag => (

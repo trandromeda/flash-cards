@@ -79,8 +79,8 @@ async function migrateData() {
     // Transform flashcards to match database schema
     const transformedCards = flashcards.map(card => ({
       id: card.id,
-      vietnamese: card.vietnamese,
-      english: card.english,
+      question: card.question,
+      answer: card.answer,
       example: card.example || null,
       example_translation: card.exampleTranslation || null,
       tags: card.tags || []

@@ -1,8 +1,8 @@
 -- Create flashcards table
 CREATE TABLE IF NOT EXISTS flashcards (
   id SERIAL PRIMARY KEY,
-  vietnamese TEXT NOT NULL,
-  english TEXT NOT NULL,
+  question TEXT NOT NULL,
+  answer TEXT NOT NULL,
   example TEXT,
   example_translation TEXT,
   tags TEXT[] NOT NULL DEFAULT '{}',

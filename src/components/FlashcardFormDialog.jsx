@@ -37,8 +37,8 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
   const [newTag, setNewTag] = useState('')
   const [deletePopoverOpen, setDeletePopoverOpen] = useState(false)
   const [formData, setFormData] = useState({
-    vietnamese: '',
-    english: '',
+    question: '',
+    answer: '',
     example: '',
     exampleTranslation: '',
     tags: [],
@@ -50,8 +50,8 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
     if (mode === 'create') {
       setIsEditMode(true)
       setFormData({
-        vietnamese: '',
-        english: '',
+        question: '',
+        answer: '',
         example: '',
         exampleTranslation: '',
         tags: [],
@@ -60,8 +60,8 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
     } else if (initialCard) {
       setIsEditMode(false)
       setFormData({
-        vietnamese: initialCard.vietnamese || '',
-        english: initialCard.english || '',
+        question: initialCard.question || '',
+        answer: initialCard.answer || '',
         example: initialCard.example || '',
         exampleTranslation: initialCard.exampleTranslation || '',
         tags: initialCard.tags || [],
@@ -88,8 +88,8 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
 
   const handleSave = async () => {
     // Validation
-    if (!formData.vietnamese.trim() || !formData.english.trim()) {
-      alert('Please fill in both Vietnamese and English fields')
+    if (!formData.question.trim() || !formData.answer.trim()) {
+      alert('Please fill in both Question and Answer fields')
       return
     }
 
@@ -136,8 +136,8 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
       // Reset to initial card data
       if (initialCard) {
         setFormData({
-          vietnamese: initialCard.vietnamese || '',
-          english: initialCard.english || '',
+          question: initialCard.question || '',
+          answer: initialCard.answer || '',
           example: initialCard.example || '',
           exampleTranslation: initialCard.exampleTranslation || '',
           tags: initialCard.tags || [],
@@ -166,10 +166,10 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
               'Create New Flashcard'
             ) : (
               <>
-                {formData.vietnamese}
+                {formData.question}
                 {!isEditMode && (
                   <Button
-                    onClick={() => playAudio(formData.vietnamese)}
+                    onClick={() => playAudio(formData.question)}
                     variant="outline"
                     size="sm"
                     className="shrink-0"
@@ -183,37 +183,37 @@ export const FlashcardFormDialog = ({ isOpen, onOpenChange, initialCard = null, 
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Vietnamese */}
+          {/* Question */}
           <div className="flex flex-col gap-3">
             {isEditMode && (
-              <Label htmlFor="vietnamese">
-                Vietnamese <span className="text-destructive">*</span>
+              <Label htmlFor="question">
+                Question <span className="text-destructive">*</span>
               </Label>
             )}
             {isEditMode ? (
               <Input
-                id="vietnamese"
-                value={formData.vietnamese}
-                onChange={(e) => setFormData({ ...formData, vietnamese: e.target.value })}
-                placeholder="Enter Vietnamese word or phrase..."
+                id="question"
+                value={formData.question}
+                onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+                placeholder="Enter question or word..."
               />
             ) : null}
           </div>
 
-          {/* English */}
+          {/* Answer */}
           <div className="flex flex-col gap-3">
-              <Label htmlFor="english">
-                English {isEditMode ? <span className="text-destructive">*</span> : null}
+              <Label htmlFor="answer">
+                Answer {isEditMode ? <span className="text-destructive">*</span> : null}
               </Label>
             {isEditMode ? (
               <Input
-                id="english"
-                value={formData.english}
-                onChange={(e) => setFormData({ ...formData, english: e.target.value })}
-                placeholder="Enter English translation..."
+                id="answer"
+                value={formData.answer}
+                onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
+                placeholder="Enter answer..."
               />
             ) : (
-              <p className="text-xl">{formData.english}</p>
+              <p className="text-xl">{formData.answer}</p>
             )}
           </div>
 

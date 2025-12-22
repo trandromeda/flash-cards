@@ -27,16 +27,16 @@ export const FlashCard = ({
   return (
     <div className="w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative border border-gray-200 dark:border-gray-700">
       <div className="p-6">
-        {/* Vietnamese and English side by side */}
+        {/* Question and Answer side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-6">
-          {/* Vietnamese side */}
+          {/* Question side */}
           <div className="md:border-r border-gray-200 dark:border-gray-700 md:pr-8 pb-4 md:pb-0 border-b md:border-b-0">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Vietnamese</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Question</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              {card.vietnamese}
+              {card.question}
             </h2>
             <Button
-              onClick={() => playAudio(card.vietnamese)}
+              onClick={() => playAudio(card.question)}
               variant="outline"
               size="sm"
               className="flex items-center gap-2"
@@ -46,16 +46,16 @@ export const FlashCard = ({
             </Button>
           </div>
 
-          {/* English side - revealed on click */}
+          {/* Answer side - revealed on click */}
           <div
             className="md:pl-8 pt-4 md:pt-0 cursor-pointer"
             onClick={onFlip}
           >
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">English</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Answer</p>
             <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold transition-all duration-300 ${
               isFlipped ? 'text-gray-900 dark:text-gray-100' : 'text-transparent bg-gray-200 dark:bg-gray-700 rounded select-none'
             }`}>
-              {isFlipped ? card.english : '••••••'}
+              {isFlipped ? card.answer : '••••••'}
             </h2>
             {!isFlipped && (
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 italic">Click to reveal</p>

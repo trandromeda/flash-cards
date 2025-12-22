@@ -32,7 +32,7 @@ export const StudyView = () => {
   // Keyboard shortcuts for study mode
   useKeyboardShortcuts({
     enabled: true,
-    onPlayWord: () => currentCard && playAudio(currentCard.vietnamese),
+    onPlayWord: () => currentCard && playAudio(currentCard.question),
     onPlayExample: () => currentCard?.example && playAudio(currentCard.example),
     onToggleFlip: () => setIsFlipped(prev => !prev),
     onNextCard: nextCard,

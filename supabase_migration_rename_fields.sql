@@ -1,0 +1,83 @@
+-- Migration: Rename vietnamese/english columns to question/answer
+-- This makes the flashcard schema more generic for different types of learning content
+-- Run this migration in your Supabase SQL Editor
+
+-- Step 1: Rename the columns in the flashcards table
+ALTER TABLE flashcards RENAME COLUMN vietnamese TO question;
+ALTER TABLE flashcards RENAME COLUMN english TO answer;
+
+-- Step 2: Drop the existing function (required because return type is changing)
+DROP FUNCTION IF EXISTS get_weighted_random_cards(text[], integer);
+
+-- Step 3: Recreate the function with new column names
+CREATE OR REPLACE FUNCTION get_weighted_random_cards(
+  selected_tags text[] DEFAULT NULL,
+  candidate_count integer DEFAULT 20
+)
+RETURNS TABLE (
+  id integer,
+  question text,
+  answer text,
+  example text,
+  example_translation text,
+  tags text[],
+  synonym_id integer,
+  last_seen timestamptz,
+  notes text,
+  created_at timestamptz,
+  updated_at timestamptz,
+  weight numeric
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  RETURN QUERY
+  WITH weighted_cards AS (
+    SELECT
+      f.*,
+      CASE
+        -- Never seen? Weight = 100
+        WHEN f.last_seen IS NULL THEN 100::numeric
+        ELSE
+          -- Base weight: sqrt(hours since last seen) + 1
+          (
+            FLOOR(SQRT(EXTRACT(EPOCH FROM (NOW() - f.last_seen)) / 3600)) + 1
+          )
+          -- Recency bonus for cards < 30 days old
+          * (
+            CASE
+              WHEN EXTRACT(EPOCH FROM (NOW() - f.created_at)) / 86400 < 30
+              THEN (1.5 - (EXTRACT(EPOCH FROM (NOW() - f.created_at)) / 86400 / 30) * 0.5)
+              ELSE 1.0
+            END
+          )
+      END::numeric as card_weight
+    FROM flashcards f
+    WHERE
+      -- Tag filtering: if selected_tags is null or empty, return all cards
+      -- Otherwise, check if card tags overlap with selected tags
+      (selected_tags IS NULL OR selected_tags = '{}' OR f.tags && selected_tags)
+  )
+  SELECT
+    wc.id,
+    wc.question,
+    wc.answer,
+    wc.example,
+    wc.example_translation,
+    wc.tags,
+    wc.synonym_id,
+    wc.last_seen,
+    wc.notes,
+    wc.created_at,
+    wc.updated_at,
+    wc.card_weight
+  FROM weighted_cards wc
+  -- Weighted random: multiply random() by weight to favor higher-weighted cards
+  ORDER BY (random() * wc.card_weight) DESC
+  LIMIT candidate_count;
+END;
+$$;
+
+-- Update the function comment
+COMMENT ON FUNCTION get_weighted_random_cards IS
+  'Returns weighted random flashcards based on spaced repetition algorithm. Uses square root growth for last_seen and applies 1.5x recency bonus for cards < 30 days old. Returns a set of candidate cards that can be randomly selected client-side.';
